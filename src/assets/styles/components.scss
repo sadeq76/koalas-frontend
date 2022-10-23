@@ -1,0 +1,7 @@
+.text-loading {
+  background-color: $secondary-color;
+  border-radius: 200px;
+  height: 1em;
+  padding-inline: 7ch;
+  animation: skeleton-loading 1s linear infinite alternate;
+}
