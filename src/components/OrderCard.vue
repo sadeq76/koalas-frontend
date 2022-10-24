@@ -2,7 +2,7 @@
   <div :class="[order.container, 'pa-2 white shadow rounded-sm']">
     <div class="d-flex justify-space-between">
       <h3><span> سفارش &nbsp;</span> {{ id }}#</h3>
-      <p>{{ date_created }}</p>
+      <p>{{ date }}</p>
     </div>
     <div
       v-for="(product, index) in products"
@@ -39,6 +39,7 @@
 <script>
 import { mapState } from "pinia";
 import { useGlobalVariable } from "@/store";
+import { convertToShamsi } from '@/helpers/text';
 export default {
   props: {
     id: {},
@@ -49,6 +50,9 @@ export default {
   },
   computed: {
     ...mapState(useGlobalVariable, ["screenSize"]),
+    date(){
+      return  convertToShamsi(this.date_created)
+    },
     finalPrice() {
       let sum = 0;
       this.products?.map((product) => (sum += product.price * product.qty));

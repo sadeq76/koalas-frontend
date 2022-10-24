@@ -190,10 +190,12 @@ export default {
           method: "POST",
           body,
           isJSON: true,
-        }).then((response) => {
-          window.open(response.link, "_self");
-          localStorage.removeItem("cart");
-        });
+        })
+          .then((response) => {
+            window.open(response.link.pay_url, "_self");
+            localStorage.removeItem("cart");
+          })
+          .catch(()=> this.loading = false);
       }
     },
     toggleModal() {

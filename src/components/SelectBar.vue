@@ -1,10 +1,10 @@
 <template>
   <div
     @click="showOptions"
-    class="position-relative full-width d-flex align-center pa-2 shadow mb-4"
+    class="position-relative full-width d-flex align-center pa-2 shadow mb-4 pointer"
   >
     <div class="d-flex align-center grow-1 overflow-hidden ml-2">
-      <span class="icon-pin ml-2"></span>
+      <span class="icon-pin ml-2 secondary-color  "></span>
       <h4 class="ml-2">آدرس :</h4>
       <p class="more">{{ selectedOption ? selectedOption.title : title }}</p>
     </div>

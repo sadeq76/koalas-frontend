@@ -77,7 +77,7 @@
         کلیه حقوق این سایت نزد کوآلاز محفوظ بوده و کپی با ذکر منبع بلامانع است
       </p>
       <p class="mb-2 secondary-color text-center font-size-6">
-        powerd by <strong>Best-Vision</strong>
+        powerd by <strong>AliRn</strong>
       </p>
     </section>
   </footer>
