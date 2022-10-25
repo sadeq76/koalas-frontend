@@ -15,7 +15,9 @@
       >
         <span class="secondary-color icon-user"></span>
       </div>
-      <p class="mb-2 font-size-8 bold primary-color">سید صادق شاهمرادی</p>
+      <p class="mb-2 font-size-8 bold primary-color">
+        {{ localStorage.getItem("name") }}
+      </p>
       <div class="full-width d-flex flex-column align-start justify-start">
         <h2 class="mb-4 primary-color">لیست ها</h2>
         <div

@@ -139,10 +139,6 @@ export default {
         }
       },
     },
-    seperator: {
-      type: String,
-      required: false,
-    },
     rules: {},
     color: {
       type: String,
@@ -183,10 +179,10 @@ export default {
     },
     blurred() {
       this.$refs.container.classList.remove(this.input["full-opacity"]);
-      this.validate();
     },
-    updateValue(event) {
-      this.$emit("update:modelValue", event.target.value);
+    async updateValue(event) {
+      await this.$emit("update:modelValue", event.target.value);
+      this.validate();
     },
     validate() {
       for (const rule of this.rules) {

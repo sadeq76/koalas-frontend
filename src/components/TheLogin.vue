@@ -10,9 +10,9 @@
       <img
         :class="[login.logo, 'mb-4']"
         src="@/assets/orginal-primary-logo.png"
-        alt="koalas-coffee logo"
+        alt="koalascoffee logo"
       />
-      <h1 class="mb-2 primary-color">صفحه ورود</h1>
+      <h2 class="mb-2 primary-color">صفحه ورود</h2>
       <p class="mb-4">{{ description }}</p>
       <div v-if="step == 2" class="mb-4 d-flex justify-center align-center">
         <button @click="priviousStep" class="icon ml-4">
@@ -36,7 +36,6 @@
           autocomplete,
           textAlign,
           rules,
-          seperator,
         }"
         dir="ltr"
         v-model="inputText"
@@ -80,9 +79,7 @@ export default {
       inputText: "",
       phoneNumber: "",
       code: null,
-      type: "tel",
       autocomplete: "off",
-      codeLength: 4,
       phoneNumberRules: [
         {
           validation: (value) => !!value || "شماره همراه الزامیست",
@@ -104,9 +101,13 @@ export default {
           type: "error",
         },
         {
-          validation: (value) =>
-            value.length === 2 * this.codeLength - 1 ||
-            `کد${this.codeLength} رقمی است`,
+          validation: (value) => value.length === 4 || `کد 4 رقمی است`,
+          type: "error",
+        },
+      ],
+      nameRules: [
+        {
+          validation: (value) => !!value || "نام الزامیست",
           type: "error",
         },
       ],
@@ -118,45 +119,52 @@ export default {
       return this.screenSize.smAndDown ? "angle-down" : "close";
     },
     description() {
-      return this.step === 1
+      return this.step == 1
         ? "لطفا شماره تماس خود را وارد کنید"
-        : "کد ارسالی به شماره تماس زیر را وارد کنید";
+        : this.step == 2
+        ? "کد ارسالی به شماره تماس زیر را وارد کنید"
+        : "لطفا نام کامل خود را وارد کنید";
     },
 
     name() {
-      return this.step == 1 ? "phone" : "code";
+      return this.step == 1 ? "phone" : this.step == 2 ? "code" : "name";
     },
     placeholder() {
-      return this.step == 1 ? "شماره تماس" : "کد";
+      return this.step == 1 ? "شماره تماس" : this.step == 2 ? "کد" : "نام کامل";
     },
     append() {
       return this.step == 1 ? "۰۹" : "";
     },
     label() {
-      return this.step == 1 ? "همراه" : "کد";
+      return this.step == 1 ? "همراه" : this.step == 2 ? "کد" : "نام کامل";
     },
     required() {
-      return this.step == 1 ? true : false;
+      return true;
     },
     maxlength() {
-      return this.step == 1 ? 9 : this.codeLength;
+      return this.step == 1 ? 9 : this.step == 2 ? 4 : 20;
     },
     textAlign() {
-      return this.step === 1 ? "left" : "center";
+      return this.step == 1 ? "left" : this.step == 2 ? "center" : "right";
     },
     rules() {
-      return this.step === 1 ? this.phoneNumberRules : this.codeRules;
-    },
-    seperator() {
-      return this.step === 1 ? null : "-";
+      return this.step == 1
+        ? this.phoneNumberRules
+        : this.step == 2
+        ? this.codeRules
+        : this.nameRules;
     },
     buttonText() {
-      return this.step === 1 ? "مرحله بعد" : "ورود";
+      return this.step == 1 ? "مرحله بعد" : this.step == 2 ? "ورود" : "ثبت";
+    },
+    type() {
+      return this.step === 3 ? "text" : "tel";
     },
     isValid() {
       return (
         (this.inputText.length == 9 && this.step == 1) ||
-        (this.inputText.length == 4 && this.step == 2)
+        (this.inputText.length == 4 && this.step == 2) ||
+        (this.inputText && this.step == 3)
       );
     },
   },
@@ -176,8 +184,10 @@ export default {
     submit() {
       if (this.step === 1) {
         this.sendPhoneNumber();
-      } else {
+      } else if (this.step === 2) {
         this.sendOTP();
+      } else {
+        this.submitName();
       }
     },
 
@@ -204,17 +214,40 @@ export default {
       this.fetchData({ url: "/user/otp/", method: "POST", body })
         .then((response) => {
           if (!response.is_admin) {
-            this.toggleLoginStatus();
             localStorage.setItem("token", response.token);
-            this.$router.push({
-              name: "profile",
-            });
+            localStorage.setItem("phone", response.phone_number);
+            if (!response.full_name) {
+              this.inputText = "";
+              this.step = 3;
+            } else {
+              localStorage.setItem("name", response.full_name);
+              this.$router.push({
+                name: "profile",
+              });
+              this.toggleLoginStatus();
+            }
           } else {
-            this.toggleSnackbar({
+            this.openSnackbar({
               status: "error",
               message: "شما ادمین هستید",
             });
           }
+        })
+        .finally(() => (this.loading = false));
+    },
+
+    submitName() {
+      this.loading = true;
+      let body = new FormData();
+      body.append("full_name", this.inputText);
+
+      this.fetchData({ url: "/user/profile/", method: "PUT", body })
+        .then((response) => {
+          localStorage.setItem("name", response.full_name);
+          this.$router.push({
+            name: "profile",
+          });
+          this.toggleLoginStatus();
         })
         .finally(() => (this.loading = false));
     },

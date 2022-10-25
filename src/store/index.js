@@ -6,8 +6,6 @@ import actions from "./actions";
 export const useGlobalVariable = defineStore({
   id: "globalVars",
   state: () => ({
-    userName: "",
-    phoneNumber: "",
     snackbar: false,
     snackbarMessage: "خطایی رخ داده است ...",
     snackbarStatus: "error",

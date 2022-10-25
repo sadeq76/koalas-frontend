@@ -67,8 +67,8 @@ export default {
         },
         {
           title: "ایمیل",
-          description: "info@koalas-coffee.com",
-          path: "info@koalas-coffee.com",
+          description: "info@koalascoffee.com",
+          path: "info@koalascoffee.com",
         },
         {
           title: "آدرس",

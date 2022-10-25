@@ -4,7 +4,7 @@
       <img
         class="mb-4"
         src="@/assets/orginal-logo.png"
-        alt="koalas-coffee logo"
+        alt="koalas coffee logo"
       />
       <div class="icons d-flex justify-center align-center mb-8">
         <a
@@ -19,26 +19,33 @@
     </section>
 
     <div
-      :class="[
-        { 'justify-space-between': !screenSize.smAndDown },
-        { ' flex-column': screenSize.smAndDown },
-        'd-flex align-space-between',
-      ]"
+      :class="{
+        'flex-column': screenSize.smAndDown,
+        'd-flex align-space-between': true,
+      }"
     >
       <div
-        class="d-flex flex-column mb-4"
         :class="{
           'align-center': screenSize.smAndDown,
+          'half-width': !screenSize.smAndDown,
+          'd-flex flex-column mb-4': true,
         }"
       >
         <h3 class="mb-4 secondary-color">لینک ها</h3>
         <ul
           :class="[
-            { 'align-center': screenSize.smAndDown },
-            'px-2 d-flex flex-column flex-wrap',
+            { 'flex-column align-center': screenSize.smAndDown },
+            'px-2 d-flex  flex-wrap',
           ]"
         >
-          <li v-for="link in links" :key="link" class="mb-2">
+          <div class="ml-12">
+            <li v-for="link in links.slice(0, 3)" :key="link" class="mb-2">
+              <RouterLink class="secondary-color font-size-6" :to="link.path">{{
+                link.title
+              }}</RouterLink>
+            </li>
+          </div>
+          <li v-for="link in links.slice(3, 5)" :key="link" class="mb-2">
             <RouterLink class="secondary-color font-size-6" :to="link.path">{{
               link.title
             }}</RouterLink>
@@ -104,19 +111,13 @@ export default {
       contactInformation: [
         {
           title: "شماره تماس",
-          description: "0939 355 77 44",
-          path: "tel:+989393557744",
+          description: "+98 912 536 8970",
+          path: "tel:+989125368970",
         },
         {
           title: "ایمیل",
-          description: "info@koalas-coffee.com",
-          path: "info@koalas-coffee.com",
-        },
-        {
-          title: "آدرس",
-          description:
-            " تهران ، چهاررا نظام آباد ، خیابان وحیدیه ، جنب خیابان وحیدیه پلاک 1",
-          path: "",
+          description: "info@koalascoffee.com",
+          path: "info@koalascoffee.com",
         },
       ],
     };

@@ -15,8 +15,12 @@
         <span class="icon-user secondary-color"></span>
       </div>
       <div class="d-flex flex-column justify-start">
-        <p class="mb-2 font-size-8 bold primary-color">{{ userName || 'بدون نام'}}</p>
-        <p class="font-size-6 dark-color mb-12">{{ phoneNumber || 'بدون شماره همراه'}}</p>
+        <p class="mb-2 font-size-8 bold primary-color">
+          {{ userName || "بدون نام" }}
+        </p>
+        <p class="font-size-6 dark-color mb-12">
+          {{ phoneNumber || "بدون شماره همراه" }}
+        </p>
         <div class="d-flex flex-column justify-start">
           <h2
             v-for="(item, index) in list"
@@ -52,8 +56,8 @@
 </template>
 
 <script>
-import { useRequest } from '@/store/request';
-import { mapActions, mapState } from "pinia";
+import { useRequest } from "@/store/request";
+import { mapActions } from "pinia";
 import { useGlobalVariable } from "@/store";
 import EditProfileTab from "../components/profile/EditProfileTab.vue";
 import OrdersTab from "../components/profile/OrdersTab.vue";
@@ -64,13 +68,18 @@ export default {
     return {
       list: [
         { title: "سفارشات", component: OrdersTab },
-        { title: "ویرایش پروفایل", component: EditProfileTab },
+        { title: "آدرس های شما", component: EditProfileTab },
       ],
       currentTab: OrdersTab,
     };
   },
   computed: {
-    ...mapState(useGlobalVariable, ["userName", "phoneNumber"]),
+    userName() {
+      return localStorage.getItem("name");
+    },
+    phoneNumber() {
+      return localStorage.getItem("phone");
+    },
   },
   methods: {
     ...mapActions(useGlobalVariable, ["openSnackbar", "toggleLoginStatus"]),
