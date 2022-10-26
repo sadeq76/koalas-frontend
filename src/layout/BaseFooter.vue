@@ -85,7 +85,15 @@
         کلیه حقوق این سایت نزد کوآلاز محفوظ بوده و کپی با ذکر منبع بلامانع است
       </p>
       <p class="mb-2 secondary-color text-center font-size-6">
-        powerd by <strong>AliRn</strong>
+        powerd by
+        <a
+          href="https://alirn.ir"
+          target="_blank"
+          style="text-decoration: none"
+          class="secondary-color font-size-8"
+        >
+          <strong>AliRn</strong></a
+        >
       </p>
     </section>
   </footer>

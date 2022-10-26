@@ -1,5 +1,5 @@
 <template>
-  <form class="full-height d-flex flex-column">
+  <form @submit.prevent class="full-height d-flex flex-column">
     <h1 class="mb-2">پشتیبانی</h1>
     <p class="mb-4">به ما در بهبود سایت کمک کنید</p>
     <textarea
