@@ -56,7 +56,7 @@ export default {
     return {
       products: [],
       productsLoading: false,
-      selectedCategory: "",
+      selectedCategory: this.$route.params.category,
     };
   },
   computed: {
@@ -77,10 +77,7 @@ export default {
       this.fetchData({
         url: "/product/",
         params: {
-          category:
-            this.$route.params.category +
-            (this.selectedCategory ? "-" : "") +
-            this.selectedCategory,
+          category: this.selectedCategory,
         },
       })
         .then((response) => {
