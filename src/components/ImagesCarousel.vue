@@ -1,6 +1,5 @@
 <template>
   <div
-    @click="goToBlog(item.id)"
     v-for="(item, index) in items"
     :key="index"
     v-show="slideIndex === index"
@@ -17,9 +16,15 @@
         'pa-4 secondary-color d-flex flex-column justify-space-between',
       ]"
     >
-      <h3 :class="[carousel.title, 'bold font-size-8']">
-        {{ item.title ? item.title : "" }}
-      </h3>
+      <div class="d-flex justify-space-between">
+        <h3 :class="[carousel.title, 'bold font-size-8']">
+          {{ item.title ? item.title : "" }}
+        </h3>
+        <div class="d-flex align-center bold" @click="goToBlog(item.id)">
+          بیشتر
+          <span class="icon-angle-left secondary-color mr-2"></span>
+        </div>
+      </div>
       <div class="d-flex justify-space-between">
         <button
           @click="previousSlide"
