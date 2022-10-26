@@ -49,7 +49,7 @@
   </CategoryGrid>
 
   <div :class="['my-4', { 'mx-4': screenSize.smAndDown }]">
-    <DefaultFooter />
+    <BaseFooter />
   </div>
 </template>
 
@@ -59,13 +59,13 @@ import { useGlobalVariable, useShoppingCart } from "@/store";
 import { useRequest } from "@/store/request";
 import ProductsCard from "@/components/ProductsCard.vue";
 import CategoryGrid from "@/components/CategoryGrid.vue";
-import DefaultFooter from "@/components/DefaultFooter.vue";
+import BaseFooter from "@/layout/BaseFooter.vue";
 import ProductsCardLoading from "../components/skeleton-loading/ProductsCardLoading.vue";
 export default {
   components: {
     ProductsCard,
     CategoryGrid,
-    DefaultFooter,
+    BaseFooter,
     ProductsCardLoading,
   },
   data() {

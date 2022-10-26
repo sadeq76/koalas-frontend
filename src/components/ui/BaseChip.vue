@@ -11,6 +11,7 @@
     <slot class="font-size-6"></slot>
     <span
       v-if="active"
+      @click.stop="close"
       class="icon-close mr-4 font-size-6 secondary-color"
     ></span>
   </div>
@@ -29,10 +30,13 @@ export default {
       required: true,
     },
   },
-  emits: ["toogleStatus"],
+  emits: ["toogleStatus", "close"],
   methods: {
     toogleStatus() {
       this.$emit("toogleStatus");
+    },
+    close() {
+      this.$emit("close");
     },
   },
 };

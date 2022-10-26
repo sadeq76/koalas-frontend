@@ -5,7 +5,9 @@
     }"
   >
     <h2 class="mb-4">محصولات</h2>
-    <div class="full-width overflow-hidden overflow-x-scroll d-flex hide-scroll">
+    <div
+      class="full-width overflow-hidden overflow-x-scroll d-flex hide-scroll"
+    >
       <BaseChip
         class="ml-4"
         v-for="(sub, index) in subCat"
@@ -13,6 +15,8 @@
         :active="selectedCategory == sub.value"
         :value="sub.value"
         v-model="selectedCategory"
+        @click="getProducts"
+        @close="removeFilter"
       >
         <p class="no-wrap">
           {{ sub.title }}
@@ -35,7 +39,7 @@
       >
     </div>
   </div>
-  <DefaultFooter> </DefaultFooter>
+  <BaseFooter> </BaseFooter>
 </template>
 
 <script>
@@ -43,11 +47,11 @@ import { mapActions, mapState } from "pinia";
 import { useGlobalVariable, useShoppingCart } from "@/store";
 import { useRequest } from "@/store/request";
 import ProductsCard from "@/components/ProductsCard.vue";
-import DefaultFooter from "@/components/DefaultFooter.vue";
+import BaseFooter from "@/layout/BaseFooter.vue";
 import ProductsCardLoading from "../components/skeleton-loading/ProductsCardLoading.vue";
 import BaseChip from "@/components/ui/BaseChip.vue";
 export default {
-  components: { ProductsCard, DefaultFooter, ProductsCardLoading, BaseChip },
+  components: { ProductsCard, BaseFooter, ProductsCardLoading, BaseChip },
   data() {
     return {
       products: [],
@@ -84,9 +88,8 @@ export default {
         })
         .finally(() => (this.productsLoading = false));
     },
-  },
-  watch: {
-    selectedCategory() {
+    removeFilter() {
+      this.selectedCategory = "";
       this.getProducts();
     },
   },

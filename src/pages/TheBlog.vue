@@ -48,7 +48,7 @@
     </div> -->
   </div>
   <div :class="['my-4', { 'mx-4': screenSize.smAndDown }]">
-    <DefaultFooter />
+    <BaseFooter />
   </div>
 </template>
 
@@ -56,11 +56,11 @@
 import { useGlobalVariable } from "@/store/index";
 import { mapActions, mapState } from "pinia";
 import { useRequest } from "@/store/request";
-import DefaultFooter from "@/components/DefaultFooter.vue";
+import BaseFooter from "@/layout/BaseFooter.vue";
 import { convertToShamsi } from "@/helpers/text";
 
 export default {
-  components: { DefaultFooter },
+  components: { BaseFooter },
   data() {
     return {
       blog: {},
@@ -71,10 +71,11 @@ export default {
     htmlContent() {
       return this.blog.description
         ?.replaceAll("<img ", '<img style="width:100%; aspect-ratio: 16/9;"')
-        .replaceAll("<p", '<p style="line-height: 2em"')
+        .replaceAll("<p", '<p style="line-height: 2em; color: #444;"')
         .replaceAll("<h2", '<h2 style="color: #083830;" class="mb-4"')
         .replaceAll("<h3", '<h3 style="color: #083830;" class="mb-4"')
-        .replaceAll("<h4", '<h4 style="color: #083830;" class="mb-4"');
+        .replaceAll("<h4", '<h4 style="color: #083830;" class="mb-4"')
+        .replaceAll("<a", '<a style="color: #083830;" class="mb-4 font-size-8"');
     },
     date() {
       return convertToShamsi(this.blog.date_created);

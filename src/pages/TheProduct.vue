@@ -110,6 +110,7 @@ export default {
 .container {
   position: relative;
   @media (min-width: 750px) {
+    min-width: 50%;
     width: 50%;
   }
 

@@ -9,7 +9,7 @@
       </div>
       <div class="description d-flex flex-column">
         <p class="grow-1 overflow-hidden text-justify">
-          {{ description ? description : "بدون توضیحات" }}
+          {{ summary ? summary : "بدون توضیحات" }}
         </p>
         <button class="my-2 icon primary-color">
           <span class="font-size-8 more"> مشاهده بیشتر </span>
@@ -44,7 +44,7 @@ export default {
       type: String,
       required: true,
     },
-    description: {
+    summary: {
       type: String,
       required: true,
     },

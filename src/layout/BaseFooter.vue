@@ -71,6 +71,7 @@
             <a
               class="secondary-color text-justify regular font-size-8"
               :href="contact.path"
+              dir="ltr"
               >{{ contact.description }}</a
             >
           </div>

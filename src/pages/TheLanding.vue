@@ -102,7 +102,7 @@
   </div>
 
   <div :class="['my-4', { 'mx-4': screenSize.smAndDown }]">
-    <DefaultFooter />
+    <BaseFooter />
   </div>
 </template>
 
@@ -115,7 +115,7 @@ import LandingHeader from "@/components/LandingHeader.vue";
 import ProductsCard from "@/components/ProductsCard.vue";
 import LandingBlogCard from "@/components/LandingBlogCard.vue";
 import ImagesCarousel from "@/components/ImagesCarousel.vue";
-import DefaultFooter from "@/components/DefaultFooter.vue";
+import BaseFooter from "@/layout/BaseFooter.vue";
 //loading
 import ProductsCardLoading from "@/components/skeleton-loading/ProductsCardLoading.vue";
 import LandingBlogLoading from "@/components/skeleton-loading/LandingBlogLoading.vue";
@@ -125,7 +125,7 @@ export default {
     ProductsCard,
     LandingBlogCard,
     LandingBlogLoading,
-    DefaultFooter,
+    BaseFooter,
     LandingHeader,
     ImagesCarousel,
     ProductsCardLoading,

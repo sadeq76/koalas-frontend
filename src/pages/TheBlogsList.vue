@@ -24,7 +24,7 @@
   </section>
 
   <div :class="['my-4', { 'mx-4': screenSize.smAndDown }]">
-    <DefaultFooter />
+    <BaseFooter />
   </div>
 </template>
 
@@ -34,10 +34,10 @@ import { mapActions, mapState } from "pinia";
 import { useRequest } from "@/store/request";
 import BlogCard from "@/components/BlogCard.vue";
 import BlogCardLoading from "@/components/skeleton-loading/BlogCardLoading.vue";
-import DefaultFooter from "@/components/DefaultFooter.vue";
+import BaseFooter from "@/layout/BaseFooter.vue";
 
 export default {
-  components: { BlogCard, BlogCardLoading, DefaultFooter },
+  components: { BlogCard, BlogCardLoading, BaseFooter },
   data() {
     return {
       email: null,
