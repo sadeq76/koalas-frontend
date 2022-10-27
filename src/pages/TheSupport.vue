@@ -34,6 +34,7 @@
               <a
                 class="secondary-color text-justify font-size-6"
                 :href="contact.path"
+                dir="ltr"
                 >{{ contact.description }}</a
               >
             </div>
@@ -60,21 +61,15 @@ export default {
       message: "",
       isOpen: false,
       contactInformation: [
-        {
+      {
           title: "شماره تماس",
-          description: "0939 355 77 44",
-          path: "tel:+989393557744",
+          description: "+98 912 536 8970",
+          path: "tel:+989125368970",
         },
         {
           title: "ایمیل",
           description: "info@koalascoffee.com",
           path: "info@koalascoffee.com",
-        },
-        {
-          title: "آدرس",
-          description:
-            " تهران ، چهاررا نظام آباد ، خیابان وحیدیه ، جنب خیابان وحیدیه پلاک 1",
-          path: "",
         },
       ],
     };

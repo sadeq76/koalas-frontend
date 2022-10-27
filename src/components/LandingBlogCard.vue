@@ -11,7 +11,7 @@
         <p class="grow-1 overflow-hidden text-justify">
           {{ summary ? summary : "بدون توضیحات" }}
         </p>
-        <button class="my-2 icon primary-color">
+        <button @click="goToBlog" class="my-2 icon primary-color">
           <span class="font-size-8 more"> مشاهده بیشتر </span>
 
           <span class="icon-angle-left" />
@@ -47,6 +47,11 @@ export default {
     summary: {
       type: String,
       required: true,
+    },
+  },
+  methods: {
+    goToBlog() {
+      this.$router.push({ name: "blog", params: { id: this.id } });
     },
   },
 };

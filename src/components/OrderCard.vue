@@ -63,7 +63,7 @@ export default {
         ? "انجام شده"
         : this.status === "sent"
         ? "ارسال شده"
-        : this.status === "preparing"
+        : this.status === "InProgress"
         ? "در حال آماده سازی"
         : "لغو شده";
     },
@@ -72,7 +72,7 @@ export default {
         ? "border-success success-color"
         : this.status === "sent"
         ? "border-info info-color"
-        : this.status === "preparing"
+        : this.status === "InProgress"
         ? "border-warn warn-color"
         : "border-error error-color";
     },

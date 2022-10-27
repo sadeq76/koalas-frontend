@@ -29,6 +29,26 @@
           <p class="px-4 pb-8 bold primary-color font-size-12">
             قیمت : {{ price }}
           </p>
+          <div
+            v-if="!screenSize.smAndDown"
+            class="grow-1 d-flex align-end ma-4"
+          >
+            <button
+              @click="
+                addProduct({
+                  id: +this.$route.params.id,
+                  image,
+                  title,
+                  price,
+                  store: qty,
+                  qty: 1,
+                })
+              "
+              class="primary secondary-color px-4 rounded-pill full-width"
+            >
+              افزودن به سبد
+            </button>
+          </div>
         </div>
       </div>
     </section>

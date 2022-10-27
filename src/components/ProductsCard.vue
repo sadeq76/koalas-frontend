@@ -2,7 +2,7 @@
   <div
     :class="[
       product.container,
-      'rounded-sm d-flex flex-column align-center pa-2 pointer',
+      'rounded-sm d-flex flex-column align-center pa-2 pointer overflow-hidden',
     ]"
     @click="productPage"
   >
@@ -20,12 +20,14 @@
         'mt-2 d-flex flex-column justify-center align-center',
       ]"
     >
-      <h3 class="thin more">{{ title ? title : "بدون نام" }}</h3>
+      <h3 class="thin more">{{ title ? title.substring(0, 18) : "بدون نام" }}{{ title.length > 18 ? '...' : "" }}</h3>
       <p class="bold mt-2 primary-color">
         {{ productPrice }}
       </p>
       <button
-        @click.stop="addProduct({ id, image, title, price, store: qty, qty:1 })"
+        @click.stop="
+          addProduct({ id, image, title, price, store: qty, qty: 1 })
+        "
         class="my-2 icon d-flex justify-center align-center"
       >
         <span class="bold font-size-8 more primary-color"> افزودن به سبد </span>
@@ -80,9 +82,9 @@ export default {
       return "تصویر " + this.title;
     },
 
-    productPrice(){
-      return this.price ? convertToRls(this.price) : "ناموجود"
-    }
+    productPrice() {
+      return this.price ? convertToRls(this.price) : "ناموجود";
+    },
   },
   methods: {
     ...mapActions(useShoppingCart, ["addProduct"]),

@@ -14,7 +14,6 @@ export default {
       redirect: "follow",
       headers: requestHeaders,
     };
-    console.log(requestOptions);
     let path = url + (requestParams ? "?" : "") + requestParams;
 
     return fetch(this.baseURL + path, requestOptions).then((response) => {

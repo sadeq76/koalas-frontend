@@ -39,17 +39,12 @@
           ]"
         >
           <div class="ml-12">
-            <li v-for="link in links.slice(0, 3)" :key="link" class="mb-2">
+            <li v-for="link in links" :key="link" class="mb-2">
               <RouterLink class="secondary-color font-size-6" :to="link.path">{{
                 link.title
               }}</RouterLink>
             </li>
           </div>
-          <li v-for="link in links.slice(3, 5)" :key="link" class="mb-2">
-            <RouterLink class="secondary-color font-size-6" :to="link.path">{{
-              link.title
-            }}</RouterLink>
-          </li>
         </ul>
       </div>
 

@@ -10,7 +10,12 @@
   />
   <BaseSnackbar />
   <button
-    v-if="basketCounter && screenSize.smAndDown && $route.path !== '/cart'"
+    v-if="
+      basketCounter &&
+      screenSize.smAndDown &&
+      $route.path !== '/cart' &&
+      $route.name !== 'product'
+    "
     @click="goToBasket"
     :data-content="basketCounter"
     class="basket-btn secondary rounded-circle"

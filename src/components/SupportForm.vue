@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent class="full-height d-flex flex-column">
+  <form @submit.prevent="sendMessage" class="full-height d-flex flex-column">
     <h1 class="mb-2">پشتیبانی</h1>
     <p class="mb-4">به ما در بهبود سایت کمک کنید</p>
     <textarea
@@ -44,7 +44,7 @@
         ></span>
       </button>
       <BaseButton
-        @clicked.prevent="sendMessage"
+        @clicked="submit"
         :loading="loading"
         :disable="!modelValue"
         :class="[
@@ -55,7 +55,7 @@
         ارسال
       </BaseButton>
     </div>
-    <p>پاسخ شما در اسرع وقت به <b>ایمیلتان </b> ارسال خواهد شد</p>
+    <p>بودی به پیام شما رسیدگی خواهد شد</p>
   </form>
 </template>
 

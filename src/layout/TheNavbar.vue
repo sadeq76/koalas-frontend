@@ -37,7 +37,12 @@
         >
           <span class="icon-bars"></span>
         </button>
-        <button v-else @click="goToCart" class="pa-0 ma-0 icon">
+        <button
+          v-else
+          @click="goToCart"
+          :class="[layout.basket, 'pa-0 ma-0 icon']"
+          :data-content="basketCounter"
+        >
           <span class="icon-basket"></span>
         </button>
       </div>
@@ -53,7 +58,7 @@
 </template>
 
 <script>
-import { useGlobalVariable } from "@/store/index";
+import { useGlobalVariable, useShoppingCart } from "@/store/index";
 import { mapState } from "pinia";
 
 //components
@@ -76,11 +81,15 @@ export default {
 
   computed: {
     ...mapState(useGlobalVariable, ["screenSize", "isLoggedIn"]),
+    ...mapState(useShoppingCart, ["products"]),
+    basketCounter() {
+      return this.products.length;
+    },
   },
 
   methods: {
     goToProfile() {
-        this.$emit("open");
+      this.$emit("open");
     },
     openProfile() {
       this.$emit("open");
@@ -176,5 +185,22 @@ export default {
       align-items: center;
     }
   }
+}
+
+
+.basket{
+  position: relative;
+}
+.basket::before {
+  content: attr(data-content);
+  border-radius: 50%;
+  background-color: #083830;
+  color: #e4f6f8;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  transform: translate(25%, 25%);
+  right: 0;
+  bottom: 0;
 }
 </style>
