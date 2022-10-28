@@ -1,7 +1,6 @@
 <template>
   <form @submit.prevent="sendMessage" class="full-height d-flex flex-column">
-    <h1 class="mb-2">پشتیبانی</h1>
-    <p class="mb-4">به ما در بهبود سایت کمک کنید</p>
+    <h1 class="mb-4">پشتیبانی</h1>
     <textarea
       class="full-width pa-2 rounded-sm"
       aria-label="message"
@@ -55,7 +54,6 @@
         ارسال
       </BaseButton>
     </div>
-    <p>بودی به پیام شما رسیدگی خواهد شد</p>
   </form>
 </template>
 

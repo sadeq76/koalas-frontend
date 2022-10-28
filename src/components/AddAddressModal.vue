@@ -147,7 +147,6 @@ export default {
     ...mapActions(useRequest, ["fetchData"]),
 
     getPosition(e) {
-      this.loading = true;
       if (e.coordinate) {
         this.markerPosition = e.coordinate;
         this.center = this.markerPosition;
@@ -156,7 +155,7 @@ export default {
           url: `/user/reverse-geocoding/${this.markerPosition[1]}/${this.markerPosition[0]}/`,
         }).then((response) => {
           this.address = response.address;
-        }).finally(() => (this.loading = false));
+        })
       }
     },
 

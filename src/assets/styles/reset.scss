@@ -146,6 +146,7 @@ textarea {
   font-size: 1rem;
   color: $dark-color;
   height: 200px;
+  resize: none;
 }
 textarea:focus {
   opacity: 1;

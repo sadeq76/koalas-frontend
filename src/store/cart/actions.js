@@ -20,7 +20,7 @@ export default {
         status: "success",
         message: "محصول با موفقیت به سبد شما اضافه شد",
       });
-      this.updateStorage();
+      this.updateLocalStorage();
     } else {
       snackbar.openSnackbar({
         status: "error",
@@ -36,7 +36,7 @@ export default {
       this.products[indexNumber].store > this.products[indexNumber].qty
     ) {
       this.products[indexNumber].qty++;
-      this.updateStorage();
+      this.updateLocalStorage();
     } else {
       snackbar.openSnackbar({
         status: "error",
@@ -48,22 +48,55 @@ export default {
   decreaseQty(id) {
     const index = this.products.findIndex((product) => product.id === id);
     this.products[index].qty--;
-    this.updateStorage();
+    this.updateLocalStorage();
   },
 
   removeItem(id) {
     this.products = this.products.filter((product) => product.id !== id);
-    this.updateStorage();
+    this.updateLocalStorage();
   },
-  updateStorage() {
+  updateLocalStorage() {
     localStorage.setItem("cart", JSON.stringify(this.products));
   },
+
+  updateProductStorage() {
+    if (this.products.length) {
+      const request = useRequest();
+      let body = [];
+      for (const product in this.products) {
+        body.push(this.products[product].id);
+      }
+      body = JSON.stringify(body);
+      request
+        .fetchData({
+          url: "/product/qty/",
+          method: "POST",
+          body,
+          isJSON: true,
+        })
+        .then((response) => {
+          for (const [index, product] of this.products.entries()) {
+            if (response[product.id] == "0") {
+              this.products.splice(index, 1);
+            }
+            if (response[product.id] < product.qty) {
+              product.store = response[product.id];
+              product.qty = response[product.id];
+            }
+          }
+          this.updateLocalStorage();
+        });
+    }
+  },
+
   async getAddresses() {
     const request = useRequest();
-    request.fetchData({
-      url: "/user/profile/",
-    }).then((result) => {
-      this.addresses = result.addresses;
-    });
+    request
+      .fetchData({
+        url: "/user/profile/",
+      })
+      .then((result) => {
+        this.addresses = result.addresses;
+      });
   },
 };

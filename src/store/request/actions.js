@@ -24,7 +24,7 @@ export default {
       } else {
         if (response.status < 500 || response.status >= 400) {
           if (response.status === 401) {
-            localStorage.clear();
+            localStorage.removeItem('token');
             this.globalVar.toggleLoginStatus();
             this.$router.push({ name: "landing" });
           }

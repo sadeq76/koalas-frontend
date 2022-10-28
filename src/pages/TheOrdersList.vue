@@ -35,7 +35,6 @@ export default {
     getOrders() {
       this.fetchData({
         url: "/product/order/",
-        params: { limit: 4, offset: this.offset },
       })
         .then((result) => {
           this.orders = result;

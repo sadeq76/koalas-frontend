@@ -13,7 +13,7 @@
         >
           {{ blog.title }}
         </h1>
-        <p>تاریخ : {{ date }}</p>
+        <p>{{ date }}</p>
       </div>
     </div>
     <div class="body mb-4 secondary overflow-hidden pa-4 full-width">
@@ -75,10 +75,15 @@ export default {
         .replaceAll("<h2", '<h2 style="color: #083830;" class="mb-4"')
         .replaceAll("<h3", '<h3 style="color: #083830;" class="mb-4"')
         .replaceAll("<h4", '<h4 style="color: #083830;" class="mb-4"')
-        .replaceAll("<a", '<a style="color: #083830;" class="mb-4 font-size-8"');
+        .replaceAll(
+          "<a",
+          '<a style="color: #083830;" class="mb-4 font-size-8"'
+        );
     },
     date() {
-      return convertToShamsi(this.blog.date_created);
+      return this.blog.date_created
+        ? "تاریخ : " + convertToShamsi(this.blog.date_created)
+        : "";
     },
   },
   methods: {

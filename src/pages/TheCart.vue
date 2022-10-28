@@ -165,6 +165,7 @@ export default {
       decrease: "decreaseQty",
       remove: "removeItem",
       getAddresses: "getAddresses",
+      updateInformaion: "updateProductStorage",
     }),
     ...mapActions(useRequest, ["fetchData"]),
     buttonClicked() {
@@ -195,7 +196,7 @@ export default {
             window.open(response.link.pay_url, "_self");
             localStorage.removeItem("cart");
           })
-          .catch(()=> this.loading = false);
+          .catch(() => (this.loading = false));
       }
     },
     toggleModal() {
@@ -206,6 +207,7 @@ export default {
     if (this.isLoggedIn) {
       this.getAddresses();
     }
+    this.updateInformaion();
   },
 };
 </script>
