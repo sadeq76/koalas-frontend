@@ -213,24 +213,17 @@ export default {
 
       this.fetchData({ url: "/user/otp/", method: "POST", body })
         .then((response) => {
-          if (!response.is_admin) {
-            localStorage.setItem("token", response.token);
-            localStorage.setItem("phone", response.phone_number);
-            if (!response.full_name) {
-              this.inputText = "";
-              this.step = 3;
-            } else {
-              localStorage.setItem("name", response.full_name);
-              this.$router.push({
-                name: "profile",
-              });
-              this.toggleLoginStatus();
-            }
+          localStorage.setItem("token", response.token);
+          localStorage.setItem("phone", response.phone_number);
+          if (!response.full_name) {
+            this.inputText = "";
+            this.step = 3;
           } else {
-            this.openSnackbar({
-              status: "error",
-              message: "شما ادمین هستید",
+            localStorage.setItem("name", response.full_name);
+            this.$router.push({
+              name: "profile",
             });
+            this.toggleLoginStatus();
           }
         })
         .finally(() => (this.loading = false));
