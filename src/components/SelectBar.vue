@@ -13,7 +13,12 @@
     <span class="icon-angle-down"></span>
     <div
       v-show="isVisible"
-      :class="[selectBar.options, 'shadow light pa-2 rounded-sm']"
+      :class="[
+        selectBar.options,
+        { [selectBar.top]: open === 'top' },
+        { [selectBar.bottom]: open === 'bottom' },
+        'shadow light pa-2 rounded-sm',
+      ]"
     >
       <transition enter-active-class="fade-down" leave-active-class="fade-up">
         <ul class="primary-color" v-show="isVisible">
@@ -52,6 +57,11 @@ export default {
       type: Array,
       required: false,
     },
+    open: {
+      type: String,
+      required: false,
+      default: "bottom",
+    },
     modelValue: {},
   },
   data() {
@@ -74,12 +84,7 @@ export default {
 
 <style lang="scss" module="selectBar">
 .options {
-  position: absolute;
   width: 100%;
-  bottom: 0;
-  left: 0;
-  z-index: 10;
-  transform: translateY(calc(100% + 0.5rem));
 
   .option {
     border-bottom: solid 0.5px rgba(0, 0, 0, 0.1);
@@ -87,5 +92,20 @@ export default {
   .option:last-child {
     border-bottom: none;
   }
+}
+
+.top {
+  position: absolute;
+  left: 0;
+  z-index: 10;
+  top: 0;
+  transform: translateY(calc(-100% - 0.5rem));
+}
+.bottom {
+  position: absolute;
+  left: 0;
+  z-index: 10;
+  bottom: 0;
+  transform: translateY(calc(100% + 0.5rem));
 }
 </style>

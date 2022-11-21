@@ -8,16 +8,9 @@
             'full-height full-width d-flex flex-column secondary',
           ]"
         >
-          <!-- <span
+          <span
             @click="back"
             :class="[product.back, 'primary-color icon-angle-right pointer']"
-          /> -->
-          <SelectBar
-            v-if="has_mill && screenSize.smAndDown"
-            v-model="mill"
-            :label="'نوع آسیاب'"
-            :placeholder="'لطفا نوع آسیاب را انتخاب کنید'"
-            :options="MillOptions"
           />
           <div class="grow-1 pa-12 overflow-hidden">
             <img :class="product.image" :src="image" :alt="title" />
@@ -64,29 +57,36 @@
     </section>
     <div
       v-if="screenSize.smAndDown"
-      :class="[
-        product['action-bar'],
-        'full-width fit-content pa-4 d-flex justify-space-between align-center',
-      ]"
+      :class="[product['action-bar'], 'full-width fit-content pa-4']"
     >
-      <div>
-        <h2 class="regular">قیمت:</h2>
-        <span
-          :class="[product['total-price'], 'primary-color font-size-12 bold']"
+      <SelectBar
+        v-if="has_mill"
+        v-model="mill"
+        :label="'نوع آسیاب'"
+        :placeholder="'لطفا نوع آسیاب را انتخاب کنید'"
+        :options="MillOptions"
+        :open="'top'"
+      />
+      <div class="d-flex justify-space-between align-center">
+        <div>
+          <h2 class="regular">قیمت:</h2>
+          <span
+            :class="[product['total-price'], 'primary-color font-size-12 bold']"
+          >
+            {{ productPrice }}</span
+          >
+        </div>
+        <BaseButton
+          @click="submit"
+          :class="[{ success: isExist() }, 'secondary-color px-4 rounded-pill']"
         >
-          {{ productPrice }}</span
-        >
-      </div>
-      <BaseButton
-        @click="submit"
-        :class="[{ success: isExist() }, 'secondary-color px-4 rounded-pill']"
-      >
-        {{ isExist() ? "سبد خرید" : "افزودن به سبد" }}
-        <span
-          :class="`icon-${isExist() ? plus : check} secondary-color
+          {{ isExist() ? "سبد خرید" : "افزودن به سبد" }}
+          <span
+            :class="`icon-${isExist() ? plus : check} secondary-color
         mr-2`"
-        />
-      </BaseButton>
+          />
+        </BaseButton>
+      </div>
     </div>
   </div>
 </template>
