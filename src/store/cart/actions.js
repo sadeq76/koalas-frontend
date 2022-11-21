@@ -8,7 +8,7 @@ export default {
     for (let [index, product] of this.products.entries()) {
       if (product.id === newProduct.id) {
         sameIndexes.push(index)
-        if (product.mill.value === newProduct.mill.value) {
+        if (product.mill?.value === newProduct.mill?.value) {
           exactSame = index
         }
       }
