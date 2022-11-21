@@ -129,6 +129,7 @@ export default {
       address: "",
       isOpen: false,
       title: "آدرس را انتخاب کنید",
+      postage: {},
     };
   },
   computed: {
@@ -144,7 +145,15 @@ export default {
       return convertToRls(sum);
     },
     deliveryPrice() {
-      return convertToRls(60000);
+      if (this.productsPrice.replaceAll("٬", "") > this.postage.free_fee) {
+        return "رایگان";
+      } else if (this.address.is_tehran) {
+        return convertToRls(this.postage.internal_postage_fee);
+      } else if (!this.address.is_tehran) {
+        return convertToRls(this.postage.foreign_postage_fee);
+      } else {
+        return "بدون داده";
+      }
     },
 
     finalPrice() {
@@ -171,33 +180,49 @@ export default {
     buttonClicked() {
       if (!this.isLoggedIn) {
         this.isOpen = true;
-      } else if (this.isLoggedIn && !this.options.length) {
-        this.openSnackbar({
-          status: "error",
-          message: "لطفا داخل پروفایل خود یک آدرس ثبت کنید",
-        });
       } else {
-        this.loading = true;
-        let products = [];
-        for (let product of this.productsList) {
-          products.push({ product_id: product.id, qty: product.qty });
-        }
-        let body = JSON.stringify({
-          address_id: this.address,
-          products,
-        });
-        this.fetchData({
-          url: "/product/order/",
-          method: "POST",
-          body,
-          isJSON: true,
-        })
-          .then((response) => {
-            window.open(response.link.pay_url, "_self");
-            localStorage.removeItem("cart");
+        this.getAddresses();
+        if (this.isLoggedIn && !this.options.length) {
+          this.openSnackbar({
+            status: "error",
+            message: "لطفا داخل پروفایل خود یک آدرس ثبت کنید",
+          });
+        } else {
+          this.loading = true;
+          let products = [];
+          for (let product of this.productsList) {
+            products.push({
+              product_id: product.id,
+              qty: product.qty,
+              has_mill: product.has_mill,
+            });
+          }
+          let body = JSON.stringify({
+            address_id: this.address.id,
+            products,
+          });
+          this.fetchData({
+            url: "/product/order/",
+            method: "POST",
+            body,
+            isJSON: true,
           })
-          .catch(() => (this.loading = false));
+            .then((response) => {
+              window.open(response.link.pay_url, "_self");
+              localStorage.removeItem("cart");
+            })
+            .catch(() => (this.loading = false));
+        }
       }
+    },
+    getPostageInformation() {
+      this.fetchData({
+        url: "/postage/",
+      })
+        .then((response) => {
+          this.postage = response;
+        })
+        .catch(() => (this.loading = false));
     },
     toggleModal() {
       this.isOpen = !this.isOpen;
@@ -208,6 +233,7 @@ export default {
       this.getAddresses();
     }
     this.updateInformaion();
+    this.getPostageInformation();
   },
 };
 </script>

@@ -35,16 +35,21 @@
         <ul
           :class="[
             { 'flex-column align-center': screenSize.smAndDown },
-            'px-2 d-flex  flex-wrap',
+            'px-2',
           ]"
         >
-          <div class="ml-12">
-            <li v-for="link in links" :key="link" class="mb-2">
-              <RouterLink class="secondary-color font-size-6" :to="link.path">{{
-                link.title
-              }}</RouterLink>
-            </li>
-          </div>
+          <li
+            v-for="link in links"
+            :key="link"
+            :class="{
+              'mb-4': true,
+              'd-flex justify-center': screenSize.smAndDown,
+            }"
+          >
+            <RouterLink class="secondary-color font-size-6" :to="link.path">{{
+              link.title
+            }}</RouterLink>
+          </li>
         </ul>
       </div>
 
@@ -77,7 +82,7 @@
     <section class="d-flex flex-column align-center">
       <hr class="full-width" />
       <p class="my-2 secondary-color text-center font-size-4">
-        کلیه حقوق این سایت نزد کوآلاز محفوظ بوده و کپی با ذکر منبع بلامانع است
+        کلیه حقوق این سایت نزد کوآلازکافی محفوظ بوده و کپی با ذکر منبع بلامانع است
       </p>
       <p class="mb-2 secondary-color text-center font-size-6">
         powerd by
@@ -108,20 +113,18 @@ export default {
       ],
       socials: [
         { icon: "insta", path: "" },
-        { icon: "whatsapp", path: "" },
         { icon: "telegram", path: "" },
-        { icon: "facebook", path: "" },
       ],
       contactInformation: [
         {
           title: "شماره تماس",
-          description: "+98 912 536 8970",
-          path: "tel:+989125368970",
+          description: "+98 919 0400 529",
+          path: "tel:+989190400529",
         },
         {
           title: "ایمیل",
-          description: "info@koalascoffee.com",
-          path: "info@koalascoffee.com",
+          description: "KoalasCoffee@gmail.com",
+          path: "KoalasCoffee@gmail.com",
         },
       ],
     };

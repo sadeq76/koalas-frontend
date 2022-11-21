@@ -2,60 +2,91 @@ import { useGlobalVariable } from "../index";
 import { useRequest } from "../request";
 
 export default {
+  checkArray(newProduct) {
+    let sameIndexes = [];
+    let exactSame;
+    for (let [index, product] of this.products.entries()) {
+      if (product.id === newProduct.id) {
+        sameIndexes.push(index)
+        if (product.mill.value === newProduct.mill.value) {
+          exactSame = index
+        }
+      }
+    }
+    return { sameIndexes, exactSame };
+  },
+  updateProductsStore(sameIndexes, operation) {
+    for (const index in sameIndexes) {
+      operation === 'add' ?
+        this.products[index].store++ :
+        this.products[index].store--;
+    }
+  },
   addProduct(product) {
     const snackbar = useGlobalVariable();
-    const indexNumber = this.products.findIndex(
-      (item) => item.id === product.id
-    );
-    if (
-      indexNumber === -1 ||
-      this.products[indexNumber].store > this.products[indexNumber].qty
-    ) {
-      if (indexNumber === -1) {
-        this.products.push(product);
+    const obj = this.checkArray(product);
+    if (obj.sameIndexes.length) {
+      if (this.products[obj.sameIndexes[0]].store) {
+        if (typeof obj.exactSame === 'number') {
+          this.products[obj.exactSame].qty++
+        } else {
+          product.store = this.products[obj.sameIndexes[0]].store - 1
+          this.products.push(product);
+        }
+        this.updateProductsStore(obj.sameIndexes, 'minus')
+        snackbar.openSnackbar({
+          status: "success",
+          message: "محصول با موفقیت به سبد شما اضافه شد",
+        });
       } else {
-        this.products[indexNumber].qty++;
+        snackbar.openSnackbar({
+          status: "error",
+          message: "محصول موجود نیست",
+        });
       }
+    } else {
+      product.store--;
+      this.products.push(product);
       snackbar.openSnackbar({
         status: "success",
         message: "محصول با موفقیت به سبد شما اضافه شد",
       });
-      this.updateLocalStorage();
-    } else {
-      snackbar.openSnackbar({
-        status: "error",
-        message: "محصول موجود نیست",
-      });
     }
+    this.updateLocalStorage();
   },
-  increaseQty(id) {
+  increaseQty(product) {
     const snackbar = useGlobalVariable();
-    const indexNumber = this.products.findIndex((product) => product.id === id);
-    if (
-      indexNumber === -1 ||
-      this.products[indexNumber].store > this.products[indexNumber].qty
-    ) {
-      this.products[indexNumber].qty++;
-      this.updateLocalStorage();
+    const obj = this.checkArray(product);
+    if (this.products[obj.exactSame].store) {
+      this.products[obj.exactSame].qty++
+      this.updateProductsStore(obj.sameIndexes, 'minus');
     } else {
       snackbar.openSnackbar({
         status: "error",
         message: "محصول موجود نیست",
       });
     }
-  },
-
-  decreaseQty(id) {
-    const index = this.products.findIndex((product) => product.id === id);
-    this.products[index].qty--;
     this.updateLocalStorage();
   },
 
-  removeItem(id) {
-    this.products = this.products.filter((product) => product.id !== id);
+  decreaseQty(product) {
+    const obj = this.checkArray(product);
+    if (this.products[obj.exactSame].qty > 1) {
+      this.products[obj.exactSame].qty--
+      this.updateProductsStore(obj.sameIndexes, 'add');
+    } else {
+      this.products.splice(obj.exactSame, 1);
+      this.updateProductsStore(obj.sameIndexes, 'add');
+    }
+    this.updateLocalStorage();
+  },
+
+  removeItem(product) {
+    this.products = this.products.filter((p) => p.id !== product.id || (p.id == product.id && p.mill !== product.mill));
     this.updateLocalStorage();
   },
   updateLocalStorage() {
+    console.log(this.products);
     localStorage.setItem("cart", JSON.stringify(this.products));
   },
 

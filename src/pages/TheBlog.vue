@@ -9,7 +9,7 @@
       >
         <h1
           class="secondary-color bold"
-          :class="{ ' mb-4': screenSize.smAndDown }"
+          :class="{ 'mb-4': screenSize.smAndDown }"
         >
           {{ blog.title }}
         </h1>
@@ -67,7 +67,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(useGlobalVariable, ["screenSize"]),
+    ...mapState(useGlobalVariable, ["screenSize", "baseURL"]),
     htmlContent() {
       return this.blog.description
         ?.replaceAll("<img ", '<img style="width:100%; aspect-ratio: 16/9;"')

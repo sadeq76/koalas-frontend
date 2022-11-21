@@ -8,9 +8,16 @@
             'full-height full-width d-flex flex-column secondary',
           ]"
         >
-          <span
+          <!-- <span
             @click="back"
             :class="[product.back, 'primary-color icon-angle-right pointer']"
+          /> -->
+          <SelectBar
+            v-if="has_mill && screenSize.smAndDown"
+            v-model="mill"
+            :label="'نوع آسیاب'"
+            :placeholder="'لطفا نوع آسیاب را انتخاب کنید'"
+            :options="MillOptions"
           />
           <div class="grow-1 pa-12 overflow-hidden">
             <img :class="product.image" :src="image" :alt="title" />
@@ -22,32 +29,39 @@
         </div>
         <div
           v-if="!screenSize.smAndDown"
-          class="d-flex flex-column grow-1 overflow-hidden"
+          class="d-flex flex-column grow-1 overflow-hidden px-4"
         >
-          <h1 class="mb-2 primary-color px-4 pt-4">{{ title }}</h1>
-          <p class="px-4 pb-4">{{ description }}</p>
-          <p class="px-4 pb-8 bold primary-color font-size-12">
-            قیمت : {{ price }}
-          </p>
+          <h1 class="mb-2 primary-color pt-4">{{ title }}</h1>
+          <p class="pb-4">{{ description }}</p>
+          <p class="pb-8 bold primary-color font-size-12">قیمت : {{ price }}</p>
+          <SelectBar
+            v-if="has_mill"
+            v-model="mill"
+            :label="'نوع آسیاب'"
+            :placeholder="'لطفا نوع آسیاب را انتخاب کنید'"
+            :options="MillOptions"
+          />
           <div
             v-if="!screenSize.smAndDown"
             class="grow-1 d-flex align-end ma-4"
           >
-            <button
+            <BaseButton
               @click="
                 addProduct({
-                  id: +this.$route.params.id,
+                  id: +$route.params.id,
                   image,
                   title,
                   price,
-                  store: qty,
+                  store: +store,
                   qty: 1,
+                  has_mill,
+                  mill,
                 })
               "
               class="primary secondary-color px-4 rounded-pill full-width"
             >
               افزودن به سبد
-            </button>
+            </BaseButton>
           </div>
         </div>
       </div>
@@ -67,22 +81,25 @@
           {{ productPrice }}</span
         >
       </div>
-      <button
+      <BaseButton
+        :disable="has_mill && !mill"
         @click="
           addProduct({
-            id: +this.$route.params.id,
+            id: +$route.params.id,
             image,
             title,
             price,
-            store: qty,
+            store: +store,
             qty: 1,
+            has_mill,
+            mill,
           })
         "
         class="primary secondary-color px-4 rounded-pill"
       >
         افزودن به سبد
         <span icon="icon-plus mr-2" />
-      </button>
+      </BaseButton>
     </div>
   </div>
 </template>
@@ -91,14 +108,27 @@
 import { mapActions, mapState } from "pinia";
 import { useGlobalVariable, useShoppingCart } from "@/store";
 import { convertToRls } from "../helpers/text";
+import SelectBar from "../components/SelectBar.vue";
+import BaseButton from "../components/ui/BaseButton.vue";
 export default {
+  components: { SelectBar, BaseButton },
   data() {
     return {
       title: "",
       image: "",
       description: "",
       price: 0,
-      store: 0,
+      has_mill: false,
+      store: 1,
+      MillOptions: [
+        { title: "دستگاه اسپرسو ساز خانگی", value: "home-espresso-machine" },
+        { title: "دستگاه فیلتری قهوه دمی یا فرانسه", value: "french-coffee" },
+        { title: "فرنچ پرس", value: "french-press" },
+        { title: "موکاپات", value: "moka-pot" },
+        { title: "مینی پرس - نانو پرسی", value: "mini-press" },
+        { title: "دان (آسیاب نشده)", value: "bean" },
+      ],
+      mill: null,
     };
   },
   computed: {
@@ -118,6 +148,7 @@ export default {
       this.description = this.$route.query.description;
       this.price = +this.$route.query.price;
       this.store = this.$route.query.qty;
+      this.has_mill = this.$route.query.has_mill === "true";
     },
   },
   mounted() {

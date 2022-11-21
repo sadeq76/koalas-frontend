@@ -10,6 +10,7 @@ export const useGlobalVariable = defineStore({
     snackbarMessage: "خطایی رخ داده است ...",
     snackbarStatus: "error",
     modal: false,
+    baseURL:'http://api.koalascoffee.com/',
     isLoggedIn: !!localStorage.getItem("token"),
     size: {
       xs: document.documentElement.clientWidth <= 600,

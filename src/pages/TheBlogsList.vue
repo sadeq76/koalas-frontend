@@ -1,7 +1,7 @@
 <template>
   <img
     :class="[Blogs.image, 'full-width mb-4']"
-    src="@/assets/productBanner.png"
+    :src="baseURL + 'banner/5/'"
     alt="banner"
   />
 
@@ -47,7 +47,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(useGlobalVariable, ["screenSize"]),
+    ...mapState(useGlobalVariable, ["screenSize", "baseURL"]),
   },
   methods: {
     ...mapActions(useGlobalVariable, ["openSnackbar"]),

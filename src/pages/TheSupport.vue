@@ -63,13 +63,13 @@ export default {
       contactInformation: [
       {
           title: "شماره تماس",
-          description: "+98 912 536 8970",
-          path: "tel:+989125368970",
+          description: "+98 919 0400 529",
+          path: "tel:+989190400529",
         },
         {
           title: "ایمیل",
-          description: "info@koalascoffee.com",
-          path: "info@koalascoffee.com",
+          description: "KoalasCoffee@gmail.com",
+          path: "KoalasCoffee@gmail.com",
         },
       ],
     };
@@ -132,7 +132,7 @@ export default {
     left: 0;
     width: 40%;
     height: 80%;
-    background-image: url("@/assets/support.jpg");
+    background-image: url("http://api.koalascoffee.com/banner/4/");
     background-size: cover;
     background-position: center;
     overflow: hidden;

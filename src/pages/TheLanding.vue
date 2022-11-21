@@ -49,7 +49,7 @@
 
   <img
     :class="[TheLanding.banner, { 'my-8': !screenSize.smAndDown }, 'my-4']"
-    src="@/assets/banner.png"
+    :src="baseURL + 'banner/1/'"
     alt="adBanner"
   />
 
@@ -141,7 +141,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(useGlobalVariable, ["screenSize"]),
+    ...mapState(useGlobalVariable, ["screenSize", "baseURL"]),
     ...mapState(useShoppingCart, ["categories"]),
   },
   methods: {

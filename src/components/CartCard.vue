@@ -11,6 +11,9 @@
     <div class="d-flex flex-column">
       <h3 class="primary-color mb-4 more font-size-8 regular">
         {{ title || "بدون نام" }}
+        <span v-if="has_mill" class="bold">
+          ( {{ has_mill && mill?.title ? mill.title : "بدون آسیاب" }} )
+        </span>
       </h3>
       <p class="mb-2">قیمت نهایی:</p>
       <p class="bold primary-color font-size-12">
@@ -45,13 +48,15 @@
 <script>
 import { mapState } from "pinia";
 import { useGlobalVariable } from "@/store";
-import { convertToRls } from '@/helpers/text';
+import { convertToRls } from "@/helpers/text";
 export default {
   props: {
     id: {},
     image: {},
     title: {},
     price: {},
+    has_mill: {},
+    mill: {},
     qty: {
       type: Number,
       required: true,
@@ -72,13 +77,13 @@ export default {
   },
   methods: {
     increase() {
-      this.$emit("increase", this.id);
+      this.$emit("increase", { id: this.id, mill: this.mill });
     },
     decrease() {
-      this.$emit("decrease", this.id);
+      this.$emit("decrease", { id: this.id, mill: this.mill });
     },
     remove() {
-      return this.$emit("remove", this.id);
+      return this.$emit("remove", { id: this.id, mill: this.mill });
     },
   },
   watch: {

@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container rounded-sm">
     <img v-if="cover" :src="cover" alt="" />
     <div
       class="overlay full-width full-height px-2 d-flex flex-column justify-start primary-color"

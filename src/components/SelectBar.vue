@@ -1,12 +1,14 @@
 <template>
   <div
     @click="showOptions"
-    class="position-relative full-width d-flex align-center pa-2 shadow mb-4 pointer"
+    class="position-relative full-width d-flex align-center pa-2 mb-4 pointer"
   >
-    <div class="d-flex align-center grow-1 overflow-hidden ml-2">
-      <span class="icon-pin ml-2 secondary-color  "></span>
-      <h4 class="ml-2">آدرس :</h4>
-      <p class="more">{{ selectedOption ? selectedOption.title : title }}</p>
+    <div class="d-flex align-center grow-1 overflow-hidden">
+      <!-- <span class="icon-pin ml-2 secondary-color  mr-2"></span> -->
+      <h4>{{ label }} :</h4>
+      <p class="more mr-2">
+        {{ selectedOption ? selectedOption.title : placeholder }}
+      </p>
     </div>
     <span class="icon-angle-down"></span>
     <div
@@ -38,7 +40,11 @@
 <script>
 export default {
   props: {
-    title: {
+    label: {
+      type: String,
+      required: true,
+    },
+    placeholder: {
       type: String,
       required: true,
     },
@@ -60,7 +66,7 @@ export default {
     },
     selectOption(option) {
       this.selectedOption = option;
-      this.$emit("update:modelValue", this.selectedOption.id);
+      this.$emit("update:modelValue", this.selectedOption);
     },
   },
 };
@@ -72,6 +78,7 @@ export default {
   width: 100%;
   bottom: 0;
   left: 0;
+  z-index: 10;
   transform: translateY(calc(100% + 0.5rem));
 
   .option {

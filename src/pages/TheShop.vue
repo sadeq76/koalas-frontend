@@ -1,7 +1,7 @@
 <template>
   <img
     :class="[shop.image, 'full-width mb-4']"
-    src="@/assets/productBanner.png"
+    :src="baseURL + 'banner/2/'"
     alt="banner"
   />
   <div
@@ -29,7 +29,7 @@
 
   <img
     :class="[shop.banner, 'my-12']"
-    src="@/assets/banner.png"
+    :src="baseURL + 'banner/3/'"
     alt="adBanner"
   />
 
@@ -75,7 +75,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(useGlobalVariable, ["screenSize"]),
+    ...mapState(useGlobalVariable, ["screenSize", "baseURL"]),
     ...mapState(useShoppingCart, ["categories"]),
   },
   methods: {

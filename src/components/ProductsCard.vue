@@ -20,13 +20,16 @@
         'mt-2 d-flex flex-column justify-center align-center',
       ]"
     >
-      <h3 class="thin more">{{ title ? title.substring(0, 18) : "بدون نام" }}{{ title.length > 18 ? '...' : "" }}</h3>
+      <h3 class="thin more">
+        {{ title ? title.substring(0, 18) : "بدون نام"
+        }}{{ title.length > 18 ? "..." : "" }}
+      </h3>
       <p class="bold mt-2 primary-color">
         {{ productPrice }}
       </p>
       <button
         @click.stop="
-          addProduct({ id, image, title, price, store: qty, qty: 1 })
+          addProduct({ id, image, title, price, store: qty, qty: 1, has_mill })
         "
         class="my-2 icon d-flex justify-center align-center"
       >
@@ -73,6 +76,12 @@ export default {
       type: Number,
       required: true,
     },
+
+    has_mill: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
   },
   computed: {
     productImage() {
@@ -98,6 +107,7 @@ export default {
           description: this.description,
           qty: this.qty,
           price: this.price,
+          has_mill: this.has_mill,
         },
       });
     },

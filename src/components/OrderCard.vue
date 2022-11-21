@@ -59,18 +59,14 @@ export default {
       return sum;
     },
     statusTitle() {
-      return this.status === "done"
-        ? "انجام شده"
-        : this.status === "sent"
+      return this.status === "Sent"
         ? "ارسال شده"
         : this.status === "InProgress"
         ? "در حال آماده سازی"
         : "لغو شده";
     },
     colors() {
-      return this.status === "done"
-        ? "border-success success-color"
-        : this.status === "sent"
+      return  this.status === "Sent"
         ? "border-info info-color"
         : this.status === "InProgress"
         ? "border-warn warn-color"
