@@ -10,7 +10,7 @@
         <SelectBar
           v-if="options.length"
           v-model="address"
-          v-bind="{ title, options }"
+          v-bind="{ placeholder, options, label }"
         />
         <CartCard
           v-for="product in productsList"
@@ -21,7 +21,14 @@
         ></CartCard>
         <div
           v-if="!productsList.length"
-          class="full-width text-center grow-1 d-flex justify-center align-center"
+          class="
+            full-width
+            text-center
+            grow-1
+            d-flex
+            justify-center
+            align-center
+          "
         >
           داده ای وجود ندارد
         </div>
@@ -91,7 +98,7 @@
         <SelectBar
           v-if="options.length"
           v-model="address"
-          v-bind="{ title, options }"
+          v-bind="{ placeholder, options, label }"
           class="secondary-color"
         />
         <div class="grow-1 d-flex align-end">
@@ -128,7 +135,8 @@ export default {
       loading: false,
       address: "",
       isOpen: false,
-      title: "آدرس را انتخاب کنید",
+      placeholder: "آدرس را انتخاب کنید",
+      label: "آدرس",
       postage: {},
     };
   },
@@ -145,7 +153,10 @@ export default {
       return convertToRls(sum);
     },
     deliveryPrice() {
-      if (this.productsPrice.replaceAll("٬", "") > this.postage.free_fee) {
+      const sum = Number(
+        persianToEnglish(this.productsPrice.replaceAll("٬", ""))
+      );
+      if (sum > this.postage?.free_fee) {
         return "رایگان";
       } else if (this.address.is_tehran) {
         return convertToRls(this.postage.internal_postage_fee);
@@ -159,7 +170,9 @@ export default {
     finalPrice() {
       return convertToRls(
         Number(persianToEnglish(this.productsPrice.replaceAll("٬", ""))) +
-          Number(persianToEnglish(this.deliveryPrice.replaceAll("٬", "")))
+          (this.deliveryPrice !== "رایگان"
+            ? Number(persianToEnglish(this.deliveryPrice.replaceAll("٬", "")))
+            : 0)
       );
     },
 
@@ -194,7 +207,7 @@ export default {
             products.push({
               product_id: product.id,
               qty: product.qty,
-              has_mill: product.has_mill,
+              ...(product.mill ? { mill_type: product.mill } : {}),
             });
           }
           let body = JSON.stringify({

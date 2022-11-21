@@ -46,21 +46,17 @@
             class="grow-1 d-flex align-end ma-4"
           >
             <BaseButton
-              @click="
-                addProduct({
-                  id: +$route.params.id,
-                  image,
-                  title,
-                  price,
-                  store: +store,
-                  qty: 1,
-                  has_mill,
-                  mill,
-                })
-              "
-              class="primary secondary-color px-4 rounded-pill full-width"
+              @click="submit"
+              :class="[
+                { success: isExist() },
+                'secondary-color px-4 rounded-pill full-width',
+              ]"
             >
-              افزودن به سبد
+              {{ isExist() ? "سبد خرید" : "افزودن به سبد" }}
+              <span
+                :class="`icon-${isExist() ? plus : check} secondary-color
+        mr-2`"
+              />
             </BaseButton>
           </div>
         </div>
@@ -82,23 +78,14 @@
         >
       </div>
       <BaseButton
-        :disable="has_mill && !mill"
-        @click="
-          addProduct({
-            id: +$route.params.id,
-            image,
-            title,
-            price,
-            store: +store,
-            qty: 1,
-            has_mill,
-            mill,
-          })
-        "
-        class="primary secondary-color px-4 rounded-pill"
+        @click="submit"
+        :class="[{ success: isExist() }, 'secondary-color px-4 rounded-pill']"
       >
-        افزودن به سبد
-        <span icon="icon-plus mr-2" />
+        {{ isExist() ? "سبد خرید" : "افزودن به سبد" }}
+        <span
+          :class="`icon-${isExist() ? plus : check} secondary-color
+        mr-2`"
+        />
       </BaseButton>
     </div>
   </div>
@@ -126,7 +113,7 @@ export default {
         { title: "فرنچ پرس", value: "french-press" },
         { title: "موکاپات", value: "moka-pot" },
         { title: "مینی پرس - نانو پرسی", value: "mini-press" },
-        { title: "دان (آسیاب نشده)", value: "bean" },
+        { title: "بدون آسیاب", value: "bean" },
       ],
       mill: null,
     };
@@ -138,7 +125,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(useShoppingCart, ["addProduct"]),
+    ...mapActions(useShoppingCart, ["addProduct", "checkArray"]),
     back() {
       this.$router.back();
     },
@@ -149,6 +136,29 @@ export default {
       this.price = +this.$route.query.price;
       this.store = this.$route.query.qty;
       this.has_mill = this.$route.query.has_mill === "true";
+    },
+    isExist() {
+      let value = this.checkArray({
+        id: +this.$route.params.id,
+        mill: this.mill,
+      });
+      return value.exactSame ? true : false;
+    },
+    submit() {
+      if (this.isExist()) {
+        this.$router.push({ name: "cart" });
+      } else {
+        this.addProduct({
+          id: +this.$route.params.id,
+          image: this.image,
+          title: this.title,
+          price: this.price,
+          store: +this.store,
+          qty: 1,
+          has_mill: this.has_mill,
+          mill: this.mill,
+        });
+      }
     },
   },
   mounted() {

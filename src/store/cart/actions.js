@@ -86,7 +86,6 @@ export default {
     this.updateLocalStorage();
   },
   updateLocalStorage() {
-    console.log(this.products);
     localStorage.setItem("cart", JSON.stringify(this.products));
   },
 
