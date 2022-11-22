@@ -8,19 +8,24 @@
     >
       <img :src="image" alt="src" />
     </div>
-    <div class="d-flex flex-column">
-      <h3 class="primary-color mb-4 more font-size-8 regular">
+    <div class="full-height grow-1 d-flex flex-column justify-space-between overflow-hidden ml-2">
+      <h3
+        class="primary-color mb-4 font-size-8 regular more"
+      >
         {{ title || "بدون نام" }}
+        <br />
         <span v-if="has_mill" class="bold">
           ( {{ has_mill && mill?.title ? mill.title : "بدون آسیاب" }} )
         </span>
       </h3>
-      <p class="mb-2">قیمت نهایی:</p>
-      <p class="bold primary-color font-size-12">
-        {{ finalPrice }}
-      </p>
+      <div>
+        <p class="mb-2">قیمت نهایی:</p>
+        <p class="bold primary-color font-size-12">
+          {{ finalPrice }}
+        </p>
+      </div>
     </div>
-    <div class="grow-1 d-flex flex-column align-end justify-space-between px-2">
+    <div class="d-flex flex-column align-end justify-space-between px-2">
       <div
         :class="[
           cartCard.qty,
@@ -123,16 +128,16 @@ export default {
 
 <style lang="scss" module="cartCard">
 .image {
-  width: 30%;
-
-  @media screen and (min-width: 750px) {
-    width: 20%;
-  }
+  width: 25%;
+  min-width: 25%;
 
   img {
     aspect-ratio: 1;
     object-fit: contain;
     width: 100%;
   }
+}
+.qty {
+  width: fit-content;
 }
 </style>
