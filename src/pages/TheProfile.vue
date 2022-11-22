@@ -35,18 +35,24 @@
           </h2>
         </div>
       </div>
-      <div
-        @click="logout"
-        class="grow-1 full-width d-flex justify-end align-end pointer"
-      >
-        <div class="d-flex align-center">
+      <div class="grow-1 full-width d-flex justify-end align-end">
+        <div @click="logout" class="d-flex align-cente pointer">
           <span class="ml-2">خروج</span>
           <span class="icon-angle-left"></span>
         </div>
       </div>
     </div>
     <div
-      class="grow-1 white shadow rounded full-height pa-4 overflow-x-hidden overflow-y-scroll hide-scroll"
+      class="
+        grow-1
+        white
+        shadow
+        rounded
+        full-height
+        pa-4
+        overflow-x-hidden overflow-y-scroll
+        hide-scroll
+      "
     >
       <KeepAlive>
         <component :is="currentTab"></component>

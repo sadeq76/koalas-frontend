@@ -9,17 +9,33 @@ export const cart = defineStore({
       {
         title: "پودر و دانه قهوه",
         value: "bean",
+        imageId: 8,
         sub: [
           { title: "قهوه های تک خواستگاه", value: "single" },
           { title: "قهوه های ترکیبی", value: "multi" },
           { title: "قهوه های ترک", value: "turk" },
         ],
       },
-      { title: "قهوه فوری", value: "powder" },
-      { title: "سایر محصولات", value: "other" },
-      { title: "اکسسوری های قهوه", value: "accessories" },
-      { title: "ماگ", value: "mug" },
-      { title: "جعبه هدیه", value: "gift" },
+      {
+        title: "قهوه فوری", value: "powder",
+        imageId: 6,
+      },
+      {
+        title: "سایر محصولات", value: "other",
+        imageId: 9,
+      },
+      {
+        title: "اکسسوری های قهوه", value: "accessories",
+        imageId: 5,
+      },
+      {
+        title: "ماگ", value: "mug",
+        imageId: 7,
+      },
+      {
+        title: "جعبه هدیه", value: "gift",
+        imageId: 10,
+      },
     ],
     addresses: [],
   }),

@@ -220,9 +220,11 @@ export default {
             this.step = 3;
           } else {
             localStorage.setItem("name", response.full_name);
-            this.$router.push({
-              name: "profile",
-            });
+            if (!this.screenSize.smAndDown) {
+              this.$router.push({
+                name: "profile",
+              });
+            }
             this.toggleLoginStatus();
           }
         })

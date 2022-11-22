@@ -11,7 +11,7 @@
       ]"
     >
       <div class="primary-color full-width">
-        <h1 class="mb-4">به <strong>کوالاز </strong>خوش آمدید</h1>
+        <h1 class="mb-4">به <strong>کوآلازکافی </strong>خوش آمدید</h1>
         <h2 class="mb-8 thin dark-color">
           فروشگاه دانه ، اکسسوری و لوازم تهیه قهوه
         </h2>

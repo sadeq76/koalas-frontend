@@ -164,8 +164,8 @@ export default {
       if (this.title && this.address && this.zip_code) {
         const body = new FormData();
         body.append("title", this.title);
-        body.append("latitude", this.markerPosition[0]);
-        body.append("longitude", this.markerPosition[1]);
+        body.append("latitude", this.markerPosition[1]);
+        body.append("longitude", this.markerPosition[0]);
         body.append("address", this.address);
         body.append("zip_code", this.zip_code);
 

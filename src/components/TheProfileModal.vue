@@ -40,11 +40,8 @@
           </div>
         </div>
       </div>
-      <div
-        @click="logout"
-        class="grow-1 full-width d-flex justify-end align-end my-4"
-      >
-        <div class="d-flex align-center">
+      <div class="grow-1 full-width d-flex justify-end align-end my-4">
+        <div @click="logout" class="d-flex align-center">
           <span class="ml-2">خروج</span>
           <span class="icon-angle-left"></span>
         </div>

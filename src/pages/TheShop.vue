@@ -10,7 +10,7 @@
     }"
   >
     <h2 class="mb-4">پرفروش ترین محصولات</h2>
-    <div class="d-flex flex-wrap justify-space-between">
+    <div class="d-flex flex-wrap">
       <ProductsCard
         v-for="product in products"
         :key="product.id"
@@ -42,6 +42,7 @@
         { [shop[`large-2`]]: !(index % 3) && !((index / 3) % 2) },
         'primary-color secondary pa-2',
       ]"
+      :style="`background-image: url(${baseURL}banner/${category.imageId}/); background-size: cover; background-position: center;`"
       @click="goToCategoryPage(category.value)"
     >
       {{ category.title }}

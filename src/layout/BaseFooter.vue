@@ -112,8 +112,8 @@ export default {
         { title: "پشتیبانی", path: "/support" },
       ],
       socials: [
-        { icon: "insta", path: "" },
-        { icon: "telegram", path: "" },
+        { icon: "insta", path: "instagram.com/koalascoffee" },
+        { icon: "telegram", path: "t.me/koalascoffee" },
       ],
       contactInformation: [
         {
