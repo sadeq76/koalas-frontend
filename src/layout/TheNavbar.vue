@@ -3,8 +3,8 @@
     <div :class="layout.navbar">
       <img
         @click="goToRoot"
-        :class="[layout['navbar-logo'], 'pointer']"
-        src="../assets/logo.png"
+        :class="[layout['navbar-logo'], 'pointer rounded-sm']"
+        src="../assets/logo.svg"
         alt="koalasLogo"
       />
       <ul v-if="!screenSize.smAndDown" :class="layout['navbar-links']">
@@ -187,8 +187,7 @@ export default {
   }
 }
 
-
-.basket{
+.basket {
   position: relative;
 }
 .basket::before {

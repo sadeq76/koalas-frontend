@@ -1,6 +1,14 @@
 <template>
   <div
-    class="container pa-6 secondary d-flex flex-column justify-center align-center"
+    class="
+      container
+      pa-6
+      secondary
+      d-flex
+      flex-column
+      justify-center
+      align-center
+    "
   >
     <form
       class="d-flex flex-column justify-center align-center"
@@ -9,7 +17,7 @@
     >
       <h2 class="primary-color bold mb-4">بروز باش ...</h2>
       <p class="dark-color text-center mb-8">
-        ثبت ایمیل برای دریافت آخرین بروزرسانی محصولات و بلاگهای کوآلازکافی
+        ثبت ایمیل برای دریافت آخرین بروزرسانی محصولات و بلاگهای کوالازکافی
       </p>
       <div
         :class="[

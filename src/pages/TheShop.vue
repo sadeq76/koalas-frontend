@@ -40,9 +40,11 @@
       :class="[
         { [shop[`large-1`]]: !(index % 3) && (index / 3) % 2 },
         { [shop[`large-2`]]: !(index % 3) && !((index / 3) % 2) },
-        'primary-color secondary pa-2',
+        'primary-color secondary pa-2 bold',
       ]"
-      :style="`background-image: url(${baseURL}banner/${category.imageId}/); background-size: cover; background-position: center;`"
+      :style="`background-image: url(${baseURL}banner/${
+        category.imageId + 1
+      }/); background-size: cover; background-position: center;`"
       @click="goToCategoryPage(category.value)"
     >
       {{ category.title }}
@@ -120,17 +122,6 @@ export default {
 }
 
 .large-1 {
-  grid-row-start: 2;
-  grid-row-end: 4;
-  width: 100%;
-  height: 100%;
-
-  @media (min-width: 750px) {
-    grid-row-start: 1;
-    grid-row-end: 3;
-  }
-}
-.large-2 {
   grid-row-start: 6;
   grid-row-end: 8;
   width: 100%;
@@ -140,6 +131,17 @@ export default {
     grid-row-start: 3;
     grid-row-end: 5;
     grid-column: 2;
+  }
+}
+.large-2 {
+  grid-row-start: 2;
+  grid-row-end: 4;
+  width: 100%;
+  height: 100%;
+
+  @media (min-width: 750px) {
+    grid-row-start: 1;
+    grid-row-end: 3;
   }
 }
 </style>

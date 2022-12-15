@@ -11,7 +11,7 @@
       ]"
     >
       <div class="primary-color full-width">
-        <h1 class="mb-4">به <strong>کوآلازکافی </strong>خوش آمدید</h1>
+        <h1 class="mb-4">به <strong>کوالازکافی </strong>خوش آمدید</h1>
         <h2 class="mb-8 thin dark-color">
           فروشگاه دانه ، اکسسوری و لوازم تهیه قهوه
         </h2>
@@ -19,7 +19,7 @@
           :class="[
             { 'mx-auto': screenSize.smAndDown },
             header['go-to-products'],
-            'pb-2 d-flex justify-space-between align-center'
+            'pb-2 d-flex justify-space-between align-center',
           ]"
         >
           <RouterLink class="font-size-8 pl-2" to="/shop"

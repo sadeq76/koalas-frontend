@@ -61,7 +61,7 @@ export default {
       message: "",
       isOpen: false,
       contactInformation: [
-      {
+        {
           title: "شماره تماس",
           description: "+98 919 0400 529",
           path: "tel:+989190400529",
@@ -69,7 +69,7 @@ export default {
         {
           title: "ایمیل",
           description: "KoalasCoffee@gmail.com",
-          path: "KoalasCoffee@gmail.com",
+          path: "mailto:KoalasCoffee@gmail.com",
         },
       ],
     };
@@ -87,7 +87,9 @@ export default {
         this.loading = true;
         let body = new FormData();
         body.append("message", this.message);
-        body.append("file", file);
+        if (file) {
+          body.append("file", file);
+        }
 
         this.fetchData({ url: "/user/support/", method: "POST", body })
           .then(() => {

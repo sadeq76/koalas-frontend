@@ -82,7 +82,8 @@
     <section class="d-flex flex-column align-center">
       <hr class="full-width" />
       <p class="my-2 secondary-color text-center font-size-4">
-        کلیه حقوق این سایت نزد کوآلازکافی محفوظ بوده و کپی با ذکر منبع بلامانع است
+        کلیه حقوق این سایت نزد کوالازکافی محفوظ بوده و کپی با ذکر منبع بلامانع
+        است
       </p>
       <p class="mb-2 secondary-color text-center font-size-6">
         powerd by
@@ -112,8 +113,8 @@ export default {
         { title: "پشتیبانی", path: "/support" },
       ],
       socials: [
-        { icon: "insta", path: "instagram.com/koalascoffee" },
-        { icon: "telegram", path: "t.me/koalascoffee" },
+        { icon: "insta", path: "https://instagram.com/koalascoffee" },
+        { icon: "telegram", path: "https://t.me/koalascoffee" },
       ],
       contactInformation: [
         {
@@ -124,7 +125,7 @@ export default {
         {
           title: "ایمیل",
           description: "KoalasCoffee@gmail.com",
-          path: "KoalasCoffee@gmail.com",
+          path: "mailto:KoalasCoffee@gmail.com",
         },
       ],
     };

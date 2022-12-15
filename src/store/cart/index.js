@@ -17,24 +17,29 @@ export const cart = defineStore({
         ],
       },
       {
-        title: "قهوه فوری", value: "powder",
+        title: "قهوه فوری",
+        value: "powder",
         imageId: 6,
       },
       {
-        title: "سایر محصولات", value: "other",
-        imageId: 9,
-      },
-      {
-        title: "اکسسوری های قهوه", value: "accessories",
-        imageId: 5,
-      },
-      {
-        title: "ماگ", value: "mug",
+        title: "ماگ",
+        value: "mug",
         imageId: 7,
       },
       {
-        title: "جعبه هدیه", value: "gift",
+        title: "اکسسوری های قهوه",
+        value: "accessories",
+        imageId: 5,
+      },
+      {
+        title: "جعبه هدیه",
+        value: "gift",
         imageId: 10,
+      },
+      {
+        title: "سایر محصولات",
+        value: "other",
+        imageId: 9,
       },
     ],
     addresses: [],
