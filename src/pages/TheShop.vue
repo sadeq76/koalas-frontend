@@ -40,7 +40,7 @@
       :class="[
         { [shop[`large-1`]]: !(index % 3) && (index / 3) % 2 },
         { [shop[`large-2`]]: !(index % 3) && !((index / 3) % 2) },
-        'primary-color secondary pa-2 bold',
+        'primary-color secondary pa-2 bold pointer',
       ]"
       :style="`background-image: url(${baseURL}banner/${
         category.imageId + 1

@@ -7,9 +7,12 @@ export default {
     let exactSame;
     for (let [index, product] of this.products.entries()) {
       if (product.id === newProduct.id) {
-        sameIndexes.push(index)
-        if (product.mill?.value === newProduct.mill?.value) {
-          exactSame = index
+        sameIndexes.push(index);
+        if (
+          (!product.mill && !newProduct.mill) ||
+          product.mill?.value === newProduct.mill?.value
+        ) {
+          exactSame = index;
         }
       }
     }
@@ -17,9 +20,9 @@ export default {
   },
   updateProductsStore(sameIndexes, operation) {
     for (const index in sameIndexes) {
-      operation === 'add' ?
-        this.products[index].store++ :
-        this.products[index].store--;
+      operation === "add"
+        ? this.products[index].store++
+        : this.products[index].store--;
     }
   },
   addProduct(product) {
@@ -27,13 +30,13 @@ export default {
     const obj = this.checkArray(product);
     if (obj.sameIndexes.length) {
       if (this.products[obj.sameIndexes[0]].store) {
-        if (typeof obj.exactSame === 'number') {
-          this.products[obj.exactSame].qty++
+        if (typeof obj.exactSame === "number") {
+          this.products[obj.exactSame].qty++;
         } else {
-          product.store = this.products[obj.sameIndexes[0]].store - 1
+          product.store = this.products[obj.sameIndexes[0]].store - 1;
           this.products.push(product);
         }
-        this.updateProductsStore(obj.sameIndexes, 'minus')
+        this.updateProductsStore(obj.sameIndexes, "minus");
         snackbar.openSnackbar({
           status: "success",
           message: "محصول با موفقیت به سبد شما اضافه شد",
@@ -58,8 +61,8 @@ export default {
     const snackbar = useGlobalVariable();
     const obj = this.checkArray(product);
     if (this.products[obj.exactSame].store) {
-      this.products[obj.exactSame].qty++
-      this.updateProductsStore(obj.sameIndexes, 'minus');
+      this.products[obj.exactSame].qty++;
+      this.updateProductsStore(obj.sameIndexes, "minus");
     } else {
       snackbar.openSnackbar({
         status: "error",
@@ -72,17 +75,20 @@ export default {
   decreaseQty(product) {
     const obj = this.checkArray(product);
     if (this.products[obj.exactSame].qty > 1) {
-      this.products[obj.exactSame].qty--
-      this.updateProductsStore(obj.sameIndexes, 'add');
+      this.products[obj.exactSame].qty--;
+      this.updateProductsStore(obj.sameIndexes, "add");
     } else {
       this.products.splice(obj.exactSame, 1);
-      this.updateProductsStore(obj.sameIndexes, 'add');
+      this.updateProductsStore(obj.sameIndexes, "add");
     }
     this.updateLocalStorage();
   },
 
   removeItem(product) {
-    this.products = this.products.filter((p) => p.id !== product.id || (p.id == product.id && p.mill !== product.mill));
+    this.products = this.products.filter(
+      (p) =>
+        p.id !== product.id || (p.id == product.id && p.mill !== product.mill)
+    );
     this.updateLocalStorage();
   },
   updateLocalStorage() {

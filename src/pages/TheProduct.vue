@@ -142,7 +142,7 @@ export default {
         id: +this.$route.params.id,
         mill: this.mill,
       });
-      return value.exactSame ? true : false;
+      return value.exactSame || value.exactSame == 0 ? true : false;
     },
     submit() {
       if (this.isExist()) {
