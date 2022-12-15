@@ -53,6 +53,9 @@ export default {
       this.$router.push("/");
     },
   },
+  mounted() {
+    this.isSuccessful ? localStorage.removeItem("cart") : {};
+  },
 };
 </script>
 

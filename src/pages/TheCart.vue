@@ -222,7 +222,6 @@ export default {
           })
             .then((response) => {
               window.open(response.link.pay_url, "_self");
-              localStorage.removeItem("cart");
             })
             .catch(() => (this.loading = false));
         }
