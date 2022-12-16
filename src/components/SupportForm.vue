@@ -95,6 +95,7 @@ export default {
     },
     sendMessage() {
       this.$emit("send", this.file);
+      this.file = null;
     },
   },
   components: { BaseButton },
