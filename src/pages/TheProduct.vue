@@ -26,7 +26,9 @@
         >
           <h1 class="mb-2 primary-color pt-4">{{ title }}</h1>
           <p class="pb-4">{{ description }}</p>
-          <p class="pb-8 bold primary-color font-size-12">قیمت : {{ price }}</p>
+          <p class="pb-8 bold primary-color font-size-12">
+            قیمت : {{ productPrice }}
+          </p>
           <SelectBar
             v-if="has_mill"
             v-model="mill"

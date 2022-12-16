@@ -7,9 +7,7 @@
       v-bind="{ ...order }"
       class="mb-4"
     ></OrderCard>
-    <span
-      v-if="!orders.length && !loading"
-      class="full-width text-center pa-16"
+    <span v-if="!orders.length && !loading" class="full-width text-center pa-16"
       >داده ای وجود ندارد</span
     >
   </div>
@@ -18,7 +16,7 @@
 <script>
 import { mapActions } from "pinia";
 import { useGlobalVariable } from "@/store";
-import { useRequest } from '@/store/request';
+import { useRequest } from "@/store/request";
 import OrderCard from "../OrderCard.vue";
 export default {
   components: { OrderCard },
@@ -34,11 +32,9 @@ export default {
     getOrders() {
       this.fetchData({
         url: "/product/order/",
-        params: { limit: 4, offset: this.offset },
-      })
-        .then((result) => {
-          this.orders = result;
-        })
+      }).then((result) => {
+        this.orders = result;
+      });
     },
   },
   mounted() {

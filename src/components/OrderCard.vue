@@ -16,7 +16,9 @@
         <h4 class="mb-2 regular">{{ product.title }}</h4>
         <p class="bold">{{ product.price }} تومان</p>
       </div>
-      <p class="grow-1 text-end bold">×{{ product.qty }}</p>
+      <p v-if="product.qty != 1" class="grow-1 text-end bold">
+        ×{{ product.qty }}
+      </p>
     </div>
     <hr class="mb-2 full-width" />
     <div class="mb-4 d-flex justify-space-between">
@@ -39,7 +41,7 @@
 <script>
 import { mapState } from "pinia";
 import { useGlobalVariable } from "@/store";
-import { convertToShamsi } from '@/helpers/text';
+import { convertToRls, convertToShamsi } from "@/helpers/text";
 export default {
   props: {
     id: {},
@@ -50,13 +52,13 @@ export default {
   },
   computed: {
     ...mapState(useGlobalVariable, ["screenSize"]),
-    date(){
-      return  convertToShamsi(this.date_created)
+    date() {
+      return convertToShamsi(this.date_created);
     },
     finalPrice() {
       let sum = 0;
-      this.products?.map((product) => (sum += product.price * product.qty));
-      return sum;
+      this.products?.map((product) => (sum += product.price));
+      return convertToRls(sum);
     },
     statusTitle() {
       return this.status === "Sent"
@@ -66,7 +68,7 @@ export default {
         : "لغو شده";
     },
     colors() {
-      return  this.status === "Sent"
+      return this.status === "Sent"
         ? "border-info info-color"
         : this.status === "InProgress"
         ? "border-warn warn-color"
@@ -80,7 +82,7 @@ export default {
 .container {
   width: 100%;
   @media (min-width: 750px) {
-    width: calc(50% - .5em);
+    width: calc(50% - 0.5em);
   }
   .image {
     width: 50px;
