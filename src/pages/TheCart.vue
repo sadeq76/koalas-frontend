@@ -43,13 +43,17 @@
         <div class="mb-2 secondary-color d-flex justify-space-between">
           <h4 class="regular">هزینه ارسال</h4>
           <p class="bold font-size-10">
-            {{ deliveryPrice }} <span class="regular">تومان</span>
+            {{ deliveryPrice }}
+            <span v-if="deliveryPrice !== 'بدون داده'" class="regular"
+              >تومان</span
+            >
           </p>
         </div>
         <div class="mb-2 secondary-color d-flex justify-space-between">
           <h4 class="regular">مبلغ نهایی</h4>
           <p class="bold font-size-10">
-            {{ finalPrice }} <span class="regular">تومان</span>
+            {{ finalPrice }}
+            <span v-if="finalPrice !== 'بدون داده'" class="regular">تومان</span>
           </p>
         </div>
         <BaseButton
@@ -85,13 +89,17 @@
         <div class="mb-2 secondary-color d-flex justify-space-between">
           <h4 class="regular">هزینه ارسال</h4>
           <p class="bold font-size-10">
-            {{ deliveryPrice }} <span class="regular">تومان</span>
+            {{ deliveryPrice }}
+            <span v-if="deliveryPrice !== 'بدون داده'" class="regular"
+              >تومان</span
+            >
           </p>
         </div>
         <div class="secondary-color d-flex justify-space-between">
           <h4 class="regular">مبلغ نهایی</h4>
           <p class="bold font-size-10">
-            {{ finalPrice }} <span class="regular">تومان</span>
+            {{ finalPrice }}
+            <span v-if="finalPrice !== 'بدون داده'" class="regular">تومان</span>
           </p>
         </div>
         <hr v-if="options.length" class="my-2" />
@@ -147,6 +155,12 @@ export default {
       productsList: "products",
     }),
 
+    watch: {
+      address() {
+        this.getPostageInformation();
+      },
+    },
+
     productsPrice() {
       let sum = 0;
       this.productsList?.map((product) => (sum += product.price * product.qty));
@@ -158,9 +172,9 @@ export default {
       );
       if (sum > this.postage?.free_fee) {
         return "رایگان";
-      } else if (this.address.is_tehran) {
+      } else if (this.address.is_tehran && this.postage.internal_postage_fee) {
         return convertToRls(this.postage.internal_postage_fee);
-      } else if (!this.address.is_tehran) {
+      } else if (!this.address.is_tehran && this.postage.foreign_postage_fee) {
         return convertToRls(this.postage.foreign_postage_fee);
       } else {
         return "بدون داده";
@@ -168,12 +182,14 @@ export default {
     },
 
     finalPrice() {
-      return convertToRls(
+      const final = convertToRls(
         Number(persianToEnglish(this.productsPrice.replaceAll("٬", ""))) +
           (this.deliveryPrice !== "رایگان"
             ? Number(persianToEnglish(this.deliveryPrice.replaceAll("٬", "")))
             : 0)
       );
+
+      return final == "ناعدد" ? "بدون داده" : final;
     },
 
     buttonTitle() {
@@ -207,7 +223,7 @@ export default {
             products.push({
               product_id: product.id,
               qty: product.qty,
-              ...(product.mill ? { mill_type: product.mill } : {}),
+              ...(product.mill ? { mill_type: product.mill.value } : {}),
             });
           }
           let body = JSON.stringify({

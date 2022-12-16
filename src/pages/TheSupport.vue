@@ -93,6 +93,7 @@ export default {
 
         this.fetchData({ url: "/user/support/", method: "POST", body })
           .then(() => {
+            this.message = "";
             this.openSnackbar({
               message: "پیام شما ارسال شد",
               status: "success",
@@ -134,7 +135,7 @@ export default {
     left: 0;
     width: 40%;
     height: 80%;
-    background-image: url("http://api.koalascoffee.com/banner/4/");
+    background-image: url("https://api.koalascoffee.com/banner/4/");
     background-size: cover;
     background-position: center;
     overflow: hidden;

@@ -85,6 +85,8 @@ export default {
 <style lang="scss" module="selectBar">
 .options {
   width: 100%;
+  max-height: 250px;
+  overflow-y: scroll;
 
   .option {
     border-bottom: solid 0.5px rgba(0, 0, 0, 0.1);

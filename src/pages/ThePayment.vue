@@ -40,7 +40,7 @@
 export default {
   data() {
     return {
-      isSuccessful: this.$route.query.success,
+      isSuccessful: this.$route.query.success == "true",
     };
   },
   computed: {

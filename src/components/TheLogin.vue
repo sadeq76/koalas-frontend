@@ -53,9 +53,6 @@
       >
         {{ buttonText }}
       </BaseButton>
-      <p class="font-size-6 my-4 tex-center">
-        ورود در کوالازکافی به معنی پذیرش <strong>قوانین و مقررات</strong> است
-      </p>
     </div>
   </BaseModal>
 </template>
