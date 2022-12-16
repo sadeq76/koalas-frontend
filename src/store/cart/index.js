@@ -7,7 +7,7 @@ export const cart = defineStore({
     products: [],
     categories: [
       {
-        title: "پودر و دانه قهوه",
+        title: "دان و پودر قهوه",
         value: "bean",
         imageId: 8,
         sub: [
@@ -17,9 +17,14 @@ export const cart = defineStore({
         ],
       },
       {
-        title: "قهوه فوری",
+        title: "محصولات فوری",
         value: "powder",
         imageId: 6,
+      },
+      {
+        title: "اکسسوری و لوازم دم آوری قهوه",
+        value: "accessories",
+        imageId: 5,
       },
       {
         title: "ماگ",
@@ -27,19 +32,9 @@ export const cart = defineStore({
         imageId: 7,
       },
       {
-        title: "اکسسوری های قهوه",
-        value: "accessories",
-        imageId: 5,
-      },
-      {
         title: "جعبه هدیه",
         value: "gift",
         imageId: 10,
-      },
-      {
-        title: "سایر محصولات",
-        value: "other",
-        imageId: 9,
       },
     ],
     addresses: [],

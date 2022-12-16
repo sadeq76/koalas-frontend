@@ -77,6 +77,7 @@ export default {
     selectOption(option) {
       this.selectedOption = option;
       this.$emit("update:modelValue", this.selectedOption);
+      this.$emit("changed");
     },
   },
 };

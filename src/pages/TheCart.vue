@@ -9,8 +9,10 @@
       >
         <SelectBar
           v-if="options.length"
+          @changed="getPostageInformation"
           v-model="address"
           v-bind="{ placeholder, options, label }"
+          class="shadow"
         />
         <CartCard
           v-for="product in productsList"
@@ -105,6 +107,7 @@
         <hr v-if="options.length" class="my-2" />
         <SelectBar
           v-if="options.length"
+          @changed="getPostageInformation"
           v-model="address"
           v-bind="{ placeholder, options, label }"
           class="secondary-color"
@@ -154,12 +157,6 @@ export default {
       options: "addresses",
       productsList: "products",
     }),
-
-    watch: {
-      address() {
-        this.getPostageInformation();
-      },
-    },
 
     productsPrice() {
       let sum = 0;
@@ -257,7 +254,7 @@ export default {
     },
   },
   mounted() {
-    if (this.isLoggedIn) {
+    if (localStorage.getItem("token")) {
       this.getAddresses();
     }
     this.updateInformaion();

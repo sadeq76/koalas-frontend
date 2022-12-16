@@ -1,24 +1,28 @@
 <template>
   <div :class="[order.container, 'pa-2 white shadow rounded-sm']">
     <div class="d-flex justify-space-between">
-      <h3><span> سفارش &nbsp;</span> {{ id }}#</h3>
+      <h3>
+        سفارش &nbsp;<span>{{ id }}</span> #
+      </h3>
       <p>{{ date }}</p>
     </div>
-    <div
-      v-for="(product, index) in products"
-      :key="index"
-      :class="[order.card, 'pa-2 mb-2 d-flex align-center']"
-    >
-      <div :class="[order.image, 'pa-2 ml-2 secondary rounded-circle']">
-        <img :src="product.image" alt="" />
+    <div :class="[order.products, 'hide-scroll']">
+      <div
+        v-for="(product, index) in products"
+        :key="index"
+        class="pa-2 mb-2 d-flex align-center"
+      >
+        <div :class="[order.image, 'pa-2 ml-2 secondary rounded-circle']">
+          <img :src="product.image" alt="" />
+        </div>
+        <div>
+          <h4 class="mb-2 regular">{{ product.title }}</h4>
+          <p class="bold">{{ product.price }} تومان</p>
+        </div>
+        <p v-if="product.qty != 1" class="grow-1 text-end bold">
+          ×{{ product.qty }}
+        </p>
       </div>
-      <div>
-        <h4 class="mb-2 regular">{{ product.title }}</h4>
-        <p class="bold">{{ product.price }} تومان</p>
-      </div>
-      <p v-if="product.qty != 1" class="grow-1 text-end bold">
-        ×{{ product.qty }}
-      </p>
     </div>
     <hr class="mb-2 full-width" />
     <div class="mb-4 d-flex justify-space-between">
@@ -94,9 +98,12 @@ export default {
       object-fit: contain;
     }
   }
-
   .status {
     border: 1px solid;
+  }
+  .products {
+    height: 8rem;
+    overflow-y: scroll;
   }
 }
 </style>

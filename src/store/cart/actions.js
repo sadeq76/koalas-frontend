@@ -125,6 +125,11 @@ export default {
     }
   },
 
+  clearCart() {
+    localStorage.removeItem("cart");
+    this.products = [];
+  },
+
   async getAddresses() {
     const request = useRequest();
     request

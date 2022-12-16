@@ -37,10 +37,12 @@
 </template>
 
 <script>
+import { mapActions } from "pinia";
+import { useShoppingCart } from "@/store";
 export default {
   data() {
     return {
-      isSuccessful: this.$route.query.success == "true",
+      isSuccessful: this.$route.query.success == "True",
     };
   },
   computed: {
@@ -49,12 +51,13 @@ export default {
     },
   },
   methods: {
+    ...mapActions(useShoppingCart, ["clearCart"]),
     goToHome() {
       this.$router.push("/");
     },
   },
   mounted() {
-    this.isSuccessful ? localStorage.removeItem("cart") : {};
+    if (this.isSuccessful) this.clearCart();
   },
 };
 </script>

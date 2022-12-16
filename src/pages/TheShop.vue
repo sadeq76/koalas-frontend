@@ -1,13 +1,11 @@
 <template>
-  <img
-    :class="[shop.image, 'full-width mb-4']"
-    :src="baseURL + 'banner/2/'"
-    alt="banner"
-  />
   <div
-    :class="{
-      'mx-4 mb-4': screenSize.smAndDown,
-    }"
+    :class="[
+      {
+        'mx-4': screenSize.smAndDown,
+      },
+      'mb-4',
+    ]"
   >
     <h2 class="mb-4">پرفروش ترین محصولات</h2>
     <div class="d-flex flex-wrap">
@@ -15,7 +13,6 @@
         v-for="product in products"
         :key="product.id"
         v-bind="{ ...product }"
-        class="mb-4"
       />
 
       <ProductsCardLoading v-show="productsLoading" v-for="n in 4" :key="n" />
@@ -27,29 +24,29 @@
     </div>
   </div>
 
-  <img
-    :class="[shop.banner, 'my-12']"
-    :src="baseURL + 'banner/3/'"
-    alt="adBanner"
-  />
-
-  <CategoryGrid>
+  <section :class="[shop.container, { 'mx-4': screenSize.smAndDown }]">
     <div
       v-for="(category, index) in categories"
       :key="index"
-      :class="[
-        { [shop[`large-1`]]: !(index % 3) && (index / 3) % 2 },
-        { [shop[`large-2`]]: !(index % 3) && !((index / 3) % 2) },
-        'primary-color secondary pa-2 bold pointer',
-      ]"
       :style="`background-image: url(${baseURL}banner/${
         category.imageId + 1
-      }/); background-size: cover; background-position: center;`"
+      }/); background-position: bottom 0 left 0; background-repeat: no-repeat ; grid-area: ${
+        category.value
+      }`"
+      :class="[
+        { [shop['bg-50-100']]: index > 2, [shop['bg-100-50']]: index <= 2 },
+        'primary-color secondary pa-2 bold pointer',
+      ]"
       @click="goToCategoryPage(category.value)"
     >
       {{ category.title }}
     </div>
-  </CategoryGrid>
+  </section>
+  <img
+    :class="[shop.image, 'full-width my-4']"
+    :src="baseURL + 'banner/2/'"
+    alt="banner"
+  />
 
   <div :class="['my-4', { 'mx-4': screenSize.smAndDown }]">
     <BaseFooter />
@@ -61,13 +58,11 @@ import { mapActions, mapState } from "pinia";
 import { useGlobalVariable, useShoppingCart } from "@/store";
 import { useRequest } from "@/store/request";
 import ProductsCard from "@/components/ProductsCard.vue";
-import CategoryGrid from "@/components/CategoryGrid.vue";
 import BaseFooter from "@/layout/BaseFooter.vue";
 import ProductsCardLoading from "../components/skeleton-loading/ProductsCardLoading.vue";
 export default {
   components: {
     ProductsCard,
-    CategoryGrid,
     BaseFooter,
     ProductsCardLoading,
   },
@@ -120,28 +115,38 @@ export default {
     aspect-ratio: 16/4;
   }
 }
-
-.large-1 {
-  grid-row-start: 6;
-  grid-row-end: 8;
-  width: 100%;
-  height: 100%;
+.container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(8, 1fr);
+  gap: 1rem;
+  grid-template-areas:
+    "bean"
+    "bean"
+    "powder"
+    "powder"
+    "accessories"
+    "accessories"
+    "mug"
+    "gift";
+  height: 200%;
 
   @media (min-width: 750px) {
-    grid-row-start: 3;
-    grid-row-end: 5;
-    grid-column: 2;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(4, 1fr);
+    grid-template-areas:
+      "bean powder"
+      "bean powder"
+      "accessories mug"
+      "accessories gift";
+    height: 100%;
   }
 }
-.large-2 {
-  grid-row-start: 2;
-  grid-row-end: 4;
-  width: 100%;
-  height: 100%;
 
-  @media (min-width: 750px) {
-    grid-row-start: 1;
-    grid-row-end: 3;
-  }
+.bg-50-100 {
+  background-size: 50% 100%;
+}
+.bg-100-50 {
+  background-size: 100% 50%;
 }
 </style>
