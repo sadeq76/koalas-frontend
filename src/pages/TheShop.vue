@@ -30,16 +30,17 @@
       :key="index"
       :style="`background-image: url(${baseURL}banner/${
         category.imageId + 1
-      }/); background-position: bottom 0 left 0; background-repeat: no-repeat ; grid-area: ${
-        category.value
-      }`"
+      }/); grid-area: ${category.value}`"
       :class="[
+        shop['bg-img'],
         { [shop['bg-50-100']]: index > 2, [shop['bg-100-50']]: index <= 2 },
         'primary-color secondary pa-2 bold pointer',
       ]"
       @click="goToCategoryPage(category.value)"
     >
-      {{ category.title }}
+      <span class="hidden">
+        {{ category.title }}
+      </span>
     </div>
   </section>
   <img
@@ -143,10 +144,11 @@ export default {
   }
 }
 
-.bg-50-100 {
-  background-size: 50% 100%;
-}
-.bg-100-50 {
-  background-size: 100% 50%;
+.bg-img {
+  // background-size: 100% 100%;
+  background-origin: center;
+  background-position: center;
+  background-size: 95% 100%;
+  background-repeat: no-repeat;
 }
 </style>
