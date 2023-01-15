@@ -13,7 +13,11 @@
             :class="[product.back, 'primary-color icon-angle-right pointer']"
           />
           <div class="grow-1 pa-12 overflow-hidden">
-            <img :class="product.image" :src="image" :alt="title" />
+            <img
+              :class="[product.image, 'd-shadow']"
+              :src="image"
+              :alt="title"
+            />
           </div>
           <div v-if="screenSize.smAndDown" class="full-width pa-4">
             <h1 class="mb-2 primary-color">{{ title }}</h1>

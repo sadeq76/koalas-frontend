@@ -12,11 +12,7 @@
         'rounded-sm d-flex justify-center align-center secondary pa-8',
       ]"
     >
-      <img
-        style="filter: drop-shadow(0.5rem 0.5rem 0.5rem rgba(0, 0, 0, 0.5))"
-        :src="productImage"
-        :alt="imagAlt"
-      />
+      <img class="d-shadow" :src="productImage" :alt="imagAlt" />
     </div>
     <div
       :class="[

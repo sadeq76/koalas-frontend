@@ -5,3 +5,7 @@
   padding-inline: 7ch;
   animation: skeleton-loading 1s linear infinite alternate;
 }
+
+.d-shadow {
+  filter: drop-shadow(0.5rem 0.5rem 0.5rem rgba(0, 0, 0, 0.5));
+}

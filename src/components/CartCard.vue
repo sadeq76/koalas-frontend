@@ -6,12 +6,20 @@
         'secondary pa-2 ml-4 rounded d-flex justify-center align-center',
       ]"
     >
-      <img :src="image" alt="src" />
+      <img class="d-shadow" :src="image" alt="src" />
     </div>
-    <div class="full-height grow-1 d-flex flex-column justify-space-between overflow-hidden ml-2">
-      <h3
-        class="primary-color mb-4 font-size-8 regular more"
-      >
+    <div
+      class="
+        full-height
+        grow-1
+        d-flex
+        flex-column
+        justify-space-between
+        overflow-hidden
+        ml-2
+      "
+    >
+      <h3 class="primary-color mb-4 font-size-8 regular more">
         {{ title || "بدون نام" }}
         <br />
         <span v-if="has_mill" class="bold">
