@@ -4,7 +4,7 @@
       'ma-4': screenSize.smAndDown,
     }"
   >
-    <h2 class="mb-4">محصولات</h2>
+    <h2 class="mb-4">{{ categoryName }}</h2>
     <div
       class="full-width overflow-hidden overflow-x-scroll d-flex hide-scroll"
     >
@@ -68,6 +68,11 @@ export default {
       );
       return this.categories[index].sub;
     },
+    categoryName() {
+      return this.categories.find(
+        (item) => item.value === this.$route.params.category
+      )["title"];
+    },
   },
   methods: {
     ...mapActions(useGlobalVariable, ["openSnackbar"]),
@@ -86,7 +91,7 @@ export default {
         .finally(() => (this.productsLoading = false));
     },
     removeFilter() {
-      this.selectedCategory = "";
+      this.selectedCategory = "bean";
       this.getProducts();
     },
   },

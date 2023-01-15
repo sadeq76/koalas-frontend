@@ -4,7 +4,13 @@
   <div class="content d-flex flex-column justify-start align-center">
     <div class="header d-flex flex-column justify-center align-start">
       <div
-        class="secondary-color full-width d-flex justify-space-between align-center"
+        class="
+          secondary-color
+          full-width
+          d-flex
+          justify-space-between
+          align-center
+        "
         :class="{ 'flex-column': screenSize.smAndDown }"
       >
         <h1
@@ -18,7 +24,7 @@
     </div>
     <div class="body mb-4 secondary overflow-hidden pa-4 full-width">
       <div class="html-text" v-html="htmlContent"></div>
-      <div class="full-width">
+      <div v-if="blog.video" class="full-width">
         <video
           :src="blog.video"
           class="full-width mt-4 rounded-sm"

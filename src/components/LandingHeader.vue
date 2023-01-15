@@ -13,7 +13,7 @@
       <div class="primary-color full-width">
         <h1 class="mb-4">به <strong>کوالازکافی </strong>خوش آمدید</h1>
         <h2 class="mb-8 thin dark-color">
-          فروشگاه دانه ، اکسسوری و لوازم تهیه قهوه
+          فروش انواع دان، پودر، اکسسوری و لوازم مربوط به قهوه
         </h2>
         <div
           :class="[
@@ -58,9 +58,9 @@ export default {
   data() {
     return {
       items: [
-        { title: "بهداشتی", fileName: "best-price" },
-        { title: "با کیفیت", fileName: "checked" },
-        { title: "ارزان", fileName: "sanitary" },
+        { title: "قیمت به صرفه", fileName: "best-price" },
+        { title: "کیفیت بالا", fileName: "checked" },
+        { title: "ارسال سریع", fileName: "fast" },
       ],
     };
   },
